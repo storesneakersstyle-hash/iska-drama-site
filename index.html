@@ -1,378 +1,242 @@
-html = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ISKA DRAMA</title>
+<title>ISKA DRAMA — عالم الدراما لا ينتهي</title>
+<meta name="description" content="تطبيق ISKA DRAMA — شاهد آلاف الحلقات من الدراما الكورية والتركية والعربية."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
 <style>
-/* ── EXACT APP COLORS ── */
 :root{
-  --bg:#13112A;          /* kBg */
-  --surf:#1C1835;        /* dialog bg from daily_checkin */
-  --card:#1A1A2E;        /* kCard */
-  --pink:#E91E8C;        /* kPink */
-  --purple:#7B2FBE;      /* kPurple */
-  --purple-dark:#4A148C; /* kPurpleDark */
-  --gold:#FFD740;        /* kGold */
-  --gold-dark:#FFA000;   /* kGoldDark */
-  --red:#FF4B4B;         /* kRed */
-  --white:#FFFFFF;
-  --grey:#9E9E9E;
-  --muted:#616161;
-  --div:rgba(255,255,255,0.07);
-  --gp: rgba(233,30,140,0.30);
-  --gpp:rgba(123,47,190,0.28);
-  --gg: rgba(255,215,64,0.28);
+  --bg:#13112A;--surf:#1C1835;--card:#1A1A2E;
+  --pink:#E91E8C;--purple:#7B2FBE;--pdark:#4A148C;
+  --gold:#FFD740;--gdark:#FFA000;--red:#FF4B4B;
+  --grey:#9E9E9E;--muted:#616161;--div:rgba(255,255,255,0.07);
+  --gp:rgba(233,30,140,0.28);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:#fff;font-family:'Cairo',sans-serif;overflow-x:hidden;}
-
-/* NOISE */
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.025;
+html{scroll-behavior:smooth;scroll-padding-top:70px;}
+body{background:var(--bg);color:#fff;font-family:'Cairo',sans-serif;overflow-x:hidden;line-height:1.6;}
+img{display:block;max-width:100%;height:auto;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.022;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-
-/* ORBS */
 .orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .orb{position:absolute;border-radius:50%;filter:blur(130px);animation:drift 20s ease-in-out infinite;}
-.orb1{width:650px;height:650px;background:rgba(123,47,190,.12);top:-220px;right:-180px;}
-.orb2{width:500px;height:500px;background:rgba(233,30,140,.09);bottom:-80px;left:-130px;animation-delay:-10s;}
-.orb3{width:300px;height:300px;background:rgba(255,215,64,.06);top:45%;left:42%;animation-delay:-5s;}
-@keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(35px,-45px) scale(1.07);}66%{transform:translate(-22px,30px) scale(.94);}}
+.orb1{width:700px;height:700px;background:rgba(123,47,190,.11);top:-240px;right:-200px;}
+.orb2{width:520px;height:520px;background:rgba(233,30,140,.08);bottom:-90px;left:-140px;animation-delay:-10s;}
+.orb3{width:320px;height:320px;background:rgba(255,215,64,.055);top:42%;left:40%;animation-delay:-5s;}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(38px,-48px) scale(1.07);}66%{transform:translate(-24px,32px) scale(.94);}}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;width:100%;z-index:1000;height:64px;display:flex;align-items:center;
-  justify-content:space-between;padding:0 6%;
-  background:rgba(19,17,42,.72);backdrop-filter:blur(30px) saturate(160%);
-  border-bottom:1px solid var(--div);transition:.3s;}
-nav.sc{background:rgba(19,17,42,.96);}
+nav{position:fixed;top:0;width:100%;z-index:1000;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:rgba(19,17,42,.7);backdrop-filter:blur(28px) saturate(170%);border-bottom:1px solid var(--div);transition:.3s;}
+nav.sc{background:rgba(19,17,42,.97);}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo-mark{width:36px;height:36px;border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-  box-shadow:0 4px 20px var(--gp);}
-.logo-txt{font-size:1.3rem;font-weight:900;letter-spacing:.5px;
-  background:linear-gradient(135deg,#fff,rgba(255,255,255,.7));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{color:var(--grey);text-decoration:none;font-size:.87rem;transition:.25s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;right:0;left:0;height:2px;
-  background:linear-gradient(90deg,var(--pink),var(--purple));transform:scaleX(0);transition:.25s;}
+.logo-txt{font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,#fff,rgba(255,255,255,.72));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:26px;list-style:none;}
+.nav-links a{color:var(--grey);text-decoration:none;font-size:.86rem;transition:.25s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;right:0;left:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--purple));transform:scaleX(0);transition:.25s;}
 .nav-links a:hover{color:#fff;}
 .nav-links a:hover::after{transform:scaleX(1);}
-.nav-btn{display:flex;align-items:center;gap:8px;padding:9px 22px;border-radius:50px;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  color:#fff;font-weight:700;font-size:.82rem;border:none;cursor:pointer;
-  font-family:'Cairo',sans-serif;text-decoration:none;
-  box-shadow:0 4px 22px var(--gp);transition:.3s;}
+.nav-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:50px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-weight:700;font-size:.82rem;border:none;cursor:pointer;font-family:'Cairo',sans-serif;text-decoration:none;box-shadow:0 4px 22px var(--gp);transition:.3s;}
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 10px 35px var(--gp);}
 
-/* ── HERO ── */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:52px;
-  align-items:center;padding:80px 7% 60px;position:relative;z-index:1;}
-.badge-pill{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;
-  background:rgba(233,30,140,.07);border:1px solid rgba(233,30,140,.2);
-  padding:6px 14px;border-radius:50px;}
-.bp-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);
-  box-shadow:0 0 8px var(--pink);animation:blink 1.8s ease infinite;}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;padding:84px 7% 64px;position:relative;z-index:1;}
+.badge-pill{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;background:rgba(233,30,140,.07);border:1px solid rgba(233,30,140,.22);padding:6px 16px;border-radius:50px;}
+.bp-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--pink);animation:blink 1.8s ease infinite;flex-shrink:0;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
-.bp-txt{font-size:.73rem;color:var(--pink);font-weight:700;letter-spacing:1.8px;text-transform:uppercase;}
+.bp-txt{font-size:.72rem;color:var(--pink);font-weight:700;letter-spacing:1.8px;text-transform:uppercase;}
 .hero h1{font-size:clamp(2.5rem,4.5vw,4rem);font-weight:900;line-height:1.08;margin-bottom:20px;}
-.grad{background:linear-gradient(135deg,var(--pink) 0%,var(--purple) 50%,#60A5FA 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-size:200%;animation:gs 4s ease infinite;}
+.grad{background:linear-gradient(135deg,var(--pink) 0%,var(--purple) 50%,#60A5FA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:gs 4s ease infinite;}
 @keyframes gs{0%,100%{background-position:0%;}50%{background-position:100%;}}
-.hero-p{font-size:.97rem;color:var(--grey);line-height:1.9;margin-bottom:36px;max-width:455px;}
+.hero-p{font-size:.97rem;color:var(--grey);line-height:1.9;margin-bottom:36px;max-width:460px;}
 .hero-btns{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:44px;}
-.btn-pk{display:inline-flex;align-items:center;gap:9px;padding:14px 32px;border-radius:14px;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  color:#fff;font-weight:700;font-size:.96rem;text-decoration:none;border:none;cursor:pointer;
-  font-family:'Cairo',sans-serif;box-shadow:0 8px 30px var(--gp);transition:.3s;position:relative;overflow:hidden;}
-.btn-pk::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,transparent,rgba(255,255,255,.16));
-  transform:translateX(-100%);transition:.4s;}
+.btn-pk{display:inline-flex;align-items:center;gap:9px;padding:14px 32px;border-radius:14px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-weight:700;font-size:.96rem;text-decoration:none;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 8px 30px var(--gp);transition:.35s;position:relative;overflow:hidden;}
+.btn-pk::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.16));transform:translateX(-100%);transition:.42s;}
 .btn-pk:hover::before{transform:translateX(100%);}
 .btn-pk:hover{transform:translateY(-3px);box-shadow:0 18px 50px var(--gp);}
-.btn-gh{display:inline-flex;align-items:center;gap:9px;padding:14px 32px;border-radius:14px;
-  background:rgba(255,255,255,.05);border:1px solid var(--div);
-  color:#fff;font-weight:700;font-size:.96rem;text-decoration:none;transition:.3s;
-  backdrop-filter:blur(8px);}
-.btn-gh:hover{background:rgba(255,255,255,.09);border-color:rgba(123,47,190,.4);}
+.btn-gh{display:inline-flex;align-items:center;gap:9px;padding:14px 32px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--div);color:#fff;font-weight:700;font-size:.96rem;text-decoration:none;transition:.3s;backdrop-filter:blur(8px);}
+.btn-gh:hover{background:rgba(255,255,255,.09);border-color:rgba(123,47,190,.38);}
 .hero-tags{display:flex;gap:8px;flex-wrap:wrap;}
-.htag{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);
-  border:1px solid var(--div);padding:5px 13px;border-radius:50px;font-size:.73rem;color:var(--grey);}
+.htag{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--div);padding:5px 13px;border-radius:50px;font-size:.72rem;color:var(--grey);}
 .htag-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
 
-/* ── PHONE MOCKUP ── */
 .hero-r{position:relative;display:flex;justify-content:center;align-items:center;padding:40px 0;}
-.phone-w{position:relative;width:248px;}
-.ph-glow{position:absolute;inset:-80px;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(123,47,190,.2),transparent 65%);
-  animation:pg 3s ease-in-out infinite;}
+.phone-w{position:relative;width:252px;}
+.ph-glow{position:absolute;inset:-80px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse,rgba(123,47,190,.22),transparent 65%);animation:pg 3.2s ease-in-out infinite;}
 @keyframes pg{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
-.ph-frame{position:relative;z-index:2;border-radius:46px;padding:3px;
-  background:linear-gradient(155deg,rgba(255,255,255,.18),rgba(255,255,255,.03),rgba(123,47,190,.2));
-  box-shadow:0 55px 100px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.1);}
+.ph-frame{position:relative;z-index:2;border-radius:46px;padding:3px;background:linear-gradient(155deg,rgba(255,255,255,.18),rgba(255,255,255,.03),rgba(123,47,190,.22));box-shadow:0 55px 100px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.1);}
 .ph-inner{border-radius:43px;overflow:hidden;background:#000;aspect-ratio:9/19.5;}
-.ph-screen{width:100%;height:100%;
-  background:linear-gradient(160deg,#0D0B22 0%,#180A30 40%,#0A0820 100%);
-  display:flex;flex-direction:column;padding:12px;}
+.ph-screen{width:100%;height:100%;background:linear-gradient(160deg,#0D0B22 0%,#180A30 40%,#0A0820 100%);display:flex;flex-direction:column;padding:12px;}
 .ph-notch{width:72px;height:22px;background:#000;border-radius:11px;margin:0 auto 10px;}
-.ph-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.ph-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;}
 .ph-bar span{font-size:6.5px;color:rgba(255,255,255,.7);font-weight:700;}
-.ph-logo{text-align:center;font-size:9px;font-weight:900;letter-spacing:2px;margin-bottom:12px;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.ph-banner{border-radius:10px;background:linear-gradient(135deg,#1A0830,#2A1050);
-  padding:11px;margin-bottom:10px;position:relative;overflow:hidden;}
-.ph-banner::after{content:'';position:absolute;top:0;right:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,var(--pink),var(--purple));}
-.ph-bdg{display:inline-block;background:var(--pink);color:#fff;
-  font-size:5.5px;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:5px;}
+.ph-logo-row{display:flex;align-items:center;justify-content:center;gap:5px;text-align:center;font-size:9px;font-weight:900;letter-spacing:2px;margin-bottom:12px;}
+.ph-logo-row span{background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.ph-banner{border-radius:10px;background:linear-gradient(135deg,#1A0830,#2A1050);padding:11px;margin-bottom:10px;position:relative;overflow:hidden;}
+.ph-banner::after{content:'';position:absolute;top:0;right:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--pink),var(--purple));}
+.ph-bdg{display:inline-block;background:var(--pink);color:#fff;font-size:5.5px;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:5px;}
 .ph-btitle{font-size:8.5px;font-weight:700;color:#fff;margin-bottom:3px;}
 .ph-bsub{font-size:6.5px;color:rgba(255,255,255,.45);}
 .ph-bstar{font-size:6.5px;color:var(--gold);margin-top:4px;}
-.ph-lbl{font-size:6.5px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:5px;}
+.ph-lbl{font-size:6.5px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:5px;}
 .ph-row{display:flex;gap:5px;margin-bottom:8px;}
-.ph-c{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
-  border-radius:8px;overflow:hidden;}
+.ph-c{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;}
 .ph-c img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
 .ph-c-t{font-size:5.5px;color:rgba(255,255,255,.7);font-weight:600;padding:3px 4px;text-align:center;}
-.ph-nav{display:flex;justify-content:space-around;margin-top:auto;padding-top:8px;
-  border-top:1px solid rgba(255,255,255,.06);}
+.ph-nav{display:flex;justify-content:space-around;margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);}
 .pni{display:flex;flex-direction:column;align-items:center;gap:2px;}
 .pni-i{font-size:9.5px;}
 .pni-l{font-size:5px;color:rgba(255,255,255,.35);}
 .pni-l.a{color:var(--pink);}
-
-/* floating pills */
-.fp{position:absolute;z-index:5;
-  background:rgba(28,24,53,.92);backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:8px 12px;white-space:nowrap;}
-.fp.f1{top:12px;left:-90px;animation:fpa 3s ease-in-out infinite;}
-.fp.f2{bottom:80px;right:-85px;animation:fpa 3s ease-in-out infinite;animation-delay:-1.5s;}
-.fp.f3{bottom:185px;left:-78px;animation:fpa 3s ease-in-out infinite;animation-delay:-.8s;}
-@keyframes fpa{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.fp{position:absolute;z-index:5;background:rgba(28,24,53,.93);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:9px 13px;white-space:nowrap;}
+.fp.f1{top:10px;left:-92px;animation:fpa 3s ease-in-out infinite;}
+.fp.f2{bottom:80px;right:-88px;animation:fpa 3s ease-in-out infinite;animation-delay:-1.5s;}
+.fp.f3{bottom:188px;left:-80px;animation:fpa 3s ease-in-out infinite;animation-delay:-.8s;}
+@keyframes fpa{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
 .fp-l{font-size:.6rem;color:var(--muted);margin-bottom:2px;}
-.fp-v{font-size:.82rem;font-weight:700;}
+.fp-v{font-size:.83rem;font-weight:700;}
 .c-pk{color:var(--pink);}
 .c-gd{color:var(--gold);}
 .c-pp{color:#A78BFA;}
-.c-gn{color:#69F0AE;}
 
-/* ── TICKER ── */
-.ticker{position:relative;z-index:1;overflow:hidden;
-  border-top:1px solid var(--div);border-bottom:1px solid var(--div);
-  background:rgba(28,24,53,.6);padding:12px 0;}
+.ticker{position:relative;z-index:1;overflow:hidden;border-top:1px solid var(--div);border-bottom:1px solid var(--div);background:rgba(28,24,53,.5);padding:12px 0;}
 .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;}
-.ticker::before{left:0;background:linear-gradient(90deg,rgba(28,24,53,.9),transparent);}
-.ticker::after{right:0;background:linear-gradient(-90deg,rgba(28,24,53,.9),transparent);}
-.tick-track{display:flex;gap:50px;animation:tick 30s linear infinite;}
+.ticker::before{left:0;background:linear-gradient(90deg,rgba(28,24,53,.95),transparent);}
+.ticker::after{right:0;background:linear-gradient(-90deg,rgba(28,24,53,.95),transparent);}
+.tick-track{display:flex;gap:52px;animation:tick 32s linear infinite;}
 @keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 .ti{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--muted);flex-shrink:0;}
 .ti em{font-style:normal;color:#fff;}
 
-/* ── STATS ── */
-.stats{background:rgba(28,24,53,.5);border-top:1px solid var(--div);border-bottom:1px solid var(--div);}
+.stats{background:rgba(28,24,53,.45);border-top:1px solid var(--div);border-bottom:1px solid var(--div);}
 .stats-g{display:grid;grid-template-columns:repeat(4,1fr);padding:44px 8%;}
 .stat{text-align:center;padding:16px;border-left:1px solid var(--div);}
 .stat:last-child{border-left:none;}
-.stat-n{font-size:2.3rem;font-weight:900;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.stat-d{color:var(--muted);font-size:.8rem;margin-top:4px;}
+.stat-n{font-size:2.35rem;font-weight:900;background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-d{color:var(--muted);font-size:.8rem;margin-top:5px;}
 
-/* ── DRAMAS ── */
-.dramas-g{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:50px;}
-.dc{background:var(--card);border:1px solid var(--div);border-radius:18px;
-  overflow:hidden;transition:.35s;cursor:pointer;position:relative;}
-.dc:hover{transform:translateY(-7px);border-color:rgba(233,30,140,.3);
-  box-shadow:0 28px 65px rgba(0,0,0,.55);}
-.dc img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
-.dc-bdg{position:absolute;top:10px;right:10px;
-  color:#fff;font-size:.6rem;font-weight:700;padding:3px 9px;border-radius:6px;}
-.dc-bdg.tr{background:linear-gradient(135deg,var(--pink),var(--purple));}
-.dc-bdg.ht{background:linear-gradient(135deg,#FF4500,var(--pink));}
-.dc-bdg.nw{background:linear-gradient(135deg,#00C853,#00E676);color:#000;}
-.dc-bdg.cl{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#000;}
-.dc-bdg.ex{background:linear-gradient(135deg,var(--purple),#A855F7);}
+.dramas-g{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:52px;}
+.dc{background:var(--card);border:1px solid var(--div);border-radius:18px;overflow:hidden;transition:.35s;cursor:pointer;position:relative;}
+.dc:hover{transform:translateY(-7px);border-color:rgba(233,30,140,.28);box-shadow:0 28px 65px rgba(0,0,0,.55);}
+.dc-img-wrap{position:relative;overflow:hidden;}
+.dc-img-wrap img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;transition:.4s;}
+.dc:hover .dc-img-wrap img{transform:scale(1.05);}
+.dc-bdg{position:absolute;top:10px;right:10px;color:#fff;font-size:.6rem;font-weight:700;padding:3px 9px;border-radius:6px;z-index:1;}
+.bdg-tr{background:linear-gradient(135deg,var(--pink),var(--purple));}
+.bdg-ht{background:linear-gradient(135deg,#FF4500,var(--pink));}
+.bdg-nw{background:linear-gradient(135deg,#00C853,#00E676);color:#000;}
+.bdg-cl{background:linear-gradient(135deg,var(--gold),var(--gdark));color:#000;}
+.bdg-ex{background:linear-gradient(135deg,var(--purple),#A855F7);}
 .dc-body{padding:13px;}
-.dc-gen{font-size:.66rem;color:var(--pink);font-weight:700;letter-spacing:1px;
-  text-transform:uppercase;margin-bottom:4px;}
+.dc-gen{font-size:.66rem;color:var(--pink);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
 .dc-tit{font-size:.9rem;font-weight:700;margin-bottom:7px;line-height:1.3;}
-.dc-meta{display:flex;align-items:center;gap:8px;font-size:.7rem;color:var(--muted);}
+.dc-meta{display:flex;align-items:center;gap:8px;font-size:.7rem;color:var(--muted);flex-wrap:wrap;}
 .dc-star{color:var(--gold);}
 
-/* ── BENTO ── */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;margin-top:50px;}
-.bc{background:rgba(28,24,53,.7);border:1px solid var(--div);border-radius:22px;
-  padding:24px;transition:.38s;position:relative;overflow:hidden;cursor:default;}
-.bc::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(123,47,190,.08),transparent);
-  opacity:0;transition:.38s;}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;margin-top:52px;}
+.bc{background:rgba(28,24,53,.7);border:1px solid var(--div);border-radius:22px;padding:26px;transition:.38s;position:relative;overflow:hidden;}
+.bc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(123,47,190,.08),transparent);opacity:0;transition:.38s;}
 .bc:hover::before{opacity:1;}
-.bc:hover{border-color:rgba(123,47,190,.3);transform:translateY(-4px);
-  box-shadow:0 24px 60px rgba(0,0,0,.5);}
+.bc:hover{border-color:rgba(123,47,190,.28);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.5);}
 .bc.s3{grid-column:span 3;grid-row:span 2;}
 .bc.s2{grid-column:span 2;}
-.bc-i{font-size:1.8rem;margin-bottom:13px;display:block;}
-.bc-tag{font-size:.63rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--pink);margin-bottom:7px;}
-.bc h3{font-size:1.06rem;font-weight:700;margin-bottom:7px;}
+.bc-i{font-size:1.85rem;margin-bottom:14px;display:block;}
+.bc-tag{font-size:.63rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);margin-bottom:7px;}
+.bc h3{font-size:1.06rem;font-weight:700;margin-bottom:8px;}
 .bc p{color:var(--muted);font-size:.82rem;line-height:1.7;}
-.bc-big{font-size:3rem;font-weight:900;
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:13px 0 4px;}
+.bc-big{font-size:3.1rem;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gdark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:13px 0 4px;}
 
-/* ── DAILY CHECK-IN PREVIEW ── */
-.checkin-sec{background:rgba(28,24,53,.4);}
-.checkin-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:52px;}
-/* Dialog preview */
-.dialog-preview{border-radius:28px;overflow:hidden;
-  border:1px solid rgba(233,30,140,.2);
-  box-shadow:0 20px 80px rgba(233,30,140,.12),0 8px 32px rgba(0,0,0,.7);
-  max-width:360px;margin:0 auto;}
-.dp-head{background:linear-gradient(135deg,#FF2D9B,#9C27B0);padding:32px 24px 24px;position:relative;}
-.dp-icon{width:60px;height:60px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  display:flex;align-items:center;justify-content:center;font-size:1.8rem;
-  margin:0 auto 16px;box-shadow:0 8px 30px rgba(233,30,140,.45);}
-.dp-title{font-size:1.1rem;font-weight:900;text-align:center;color:#fff;margin-bottom:5px;}
-.dp-sub{font-size:.78rem;color:rgba(255,255,255,.75);text-align:center;margin-bottom:16px;}
-.dp-streak{display:flex;justify-content:center;gap:8px;}
-.ds-day{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;font-weight:700;flex-shrink:0;}
-.ds-day.done{background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.6);color:#fff;}
-.ds-day.today{background:rgba(255,255,255,.28);border:2.5px solid #fff;color:#fff;transform:scale(1.1);}
-.ds-day.next{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
-  color:rgba(255,255,255,.3);}
-.dp-body{background:var(--surf);padding:22px 24px;}
-.dp-reward{display:flex;align-items:center;gap:14px;
-  background:rgba(255,215,64,.06);border:1px solid rgba(255,215,64,.22);
-  border-radius:16px;padding:14px 16px;margin-bottom:18px;}
-.dp-r-coin{width:46px;height:46px;border-radius:50%;
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  display:flex;align-items:center;justify-content:center;font-size:1.35rem;
-  box-shadow:0 4px 16px rgba(255,215,64,.35);flex-shrink:0;}
-.dp-r-val{font-size:1.5rem;font-weight:900;color:var(--gold);}
-.dp-r-lbl{font-size:.72rem;color:rgba(255,255,255,.4);}
-.dp-btn{width:100%;padding:14px;border-radius:15px;
-  background:linear-gradient(135deg,#FF2D9B,#9C27B0);
-  color:#fff;font-weight:800;font-size:.95rem;border:none;cursor:pointer;
-  font-family:'Cairo',sans-serif;
-  box-shadow:0 8px 28px rgba(233,30,140,.4);transition:.3s;}
+.checkin-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:54px;}
+.dialog-preview{border-radius:28px;overflow:hidden;max-width:360px;margin:0 auto;border:1px solid rgba(233,30,140,.2);box-shadow:0 24px 80px rgba(233,30,140,.14),0 8px 32px rgba(0,0,0,.7);}
+.dp-head{background:linear-gradient(135deg,#FF2D9B,#9C27B0);padding:30px 24px 22px;}
+.dp-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 16px;box-shadow:0 8px 28px rgba(233,30,140,.45);}
+.dp-title{font-size:1.1rem;font-weight:900;text-align:center;color:#fff;margin-bottom:4px;}
+.dp-sub{font-size:.77rem;color:rgba(255,255,255,.75);text-align:center;margin-bottom:16px;}
+.dp-streak{display:flex;justify-content:center;gap:7px;}
+.ds-d{width:33px;height:33px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0;}
+.ds-d.done{background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.55);color:#fff;}
+.ds-d.today{background:rgba(255,255,255,.3);border:2.5px solid #fff;color:#fff;transform:scale(1.12);}
+.ds-d.next{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.3);}
+.dp-body{background:var(--surf);padding:22px 22px 18px;}
+.dp-reward{display:flex;align-items:center;gap:13px;background:rgba(255,215,64,.07);border:1px solid rgba(255,215,64,.24);border-radius:16px;padding:14px 16px;margin-bottom:16px;}
+.dp-r-coin{width:48px;height:48px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--gdark));display:flex;align-items:center;justify-content:center;font-size:1.45rem;box-shadow:0 4px 18px rgba(255,215,64,.38);}
+.dp-r-val{font-size:1.55rem;font-weight:900;color:var(--gold);}
+.dp-r-lbl{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:1px;}
+.dp-btn{width:100%;padding:14px;border-radius:15px;background:linear-gradient(135deg,#FF2D9B,#9C27B0);color:#fff;font-weight:800;font-size:.94rem;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 8px 28px rgba(233,30,140,.38);transition:.3s;}
 .dp-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(233,30,140,.5);}
-.dp-skip{display:block;text-align:center;margin-top:10px;
-  color:rgba(255,255,255,.25);font-size:.78rem;cursor:pointer;}
-/* rewards list */
-.rw-list{display:grid;gap:9px;}
-.rw{display:flex;align-items:center;gap:13px;padding:13px 16px;
-  border-radius:14px;background:rgba(28,24,53,.8);border:1px solid var(--div);
-  transition:.3s;position:relative;overflow:hidden;}
-.rw::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,var(--gold),transparent);
-  transform:scaleY(0);transition:.3s;transform-origin:top;}
-.rw:hover{border-color:rgba(255,215,64,.25);background:rgba(255,215,64,.04);}
+.dp-skip{display:block;text-align:center;margin-top:10px;color:rgba(255,255,255,.22);font-size:.77rem;cursor:pointer;}
+.rw-list{display:grid;gap:8px;}
+.rw{display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:14px;background:rgba(28,24,53,.8);border:1px solid var(--div);transition:.3s;position:relative;overflow:hidden;}
+.rw::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),transparent);transform:scaleY(0);transition:.3s;transform-origin:top;}
+.rw:hover{border-color:rgba(255,215,64,.24);background:rgba(255,215,64,.04);}
 .rw:hover::after{transform:scaleY(1);}
-.rw-e{font-size:1.35rem;flex-shrink:0;}
-.rw-info h4{font-size:.85rem;font-weight:700;}
+.rw-e{font-size:1.3rem;flex-shrink:0;}
+.rw-info h4{font-size:.84rem;font-weight:700;}
 .rw-info p{font-size:.72rem;color:var(--muted);}
-.rw-amt{margin-right:auto;font-weight:900;font-size:.98rem;color:var(--gold);}
+.rw-amt{margin-right:auto;font-weight:900;font-size:.96rem;color:var(--gold);}
 
-/* ── COIN PACKS ── */
-.packs-g{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin-top:50px;}
-.pack{background:rgba(28,24,53,.8);border:1px solid var(--div);border-radius:18px;
-  padding:20px 14px;text-align:center;transition:.35s;position:relative;cursor:pointer;}
-.pack:hover{transform:translateY(-5px);border-color:rgba(255,215,64,.3);
-  box-shadow:0 20px 55px rgba(0,0,0,.5);}
-.pack.best{border-color:rgba(255,215,64,.35);
-  background:linear-gradient(155deg,rgba(28,18,0,.9),rgba(20,14,0,.9),rgba(28,24,53,.8));}
-.pack-ribbon{position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#000;
-  padding:3px 14px;border-radius:0 0 10px 10px;font-size:.62rem;font-weight:700;}
+.packs-g{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin-top:52px;}
+.pack{background:rgba(28,24,53,.8);border:1px solid var(--div);border-radius:18px;padding:20px 14px;text-align:center;transition:.35s;position:relative;cursor:pointer;}
+.pack:hover{transform:translateY(-5px);border-color:rgba(255,215,64,.28);box-shadow:0 20px 55px rgba(0,0,0,.5);}
+.pack.best{border-color:rgba(255,215,64,.32);background:linear-gradient(155deg,rgba(30,20,0,.95),rgba(22,16,0,.95),rgba(28,24,53,.8));box-shadow:0 0 40px rgba(255,215,64,.06);}
+.pack-rib{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gdark));color:#000;padding:3px 14px;border-radius:0 0 10px 10px;font-size:.62rem;font-weight:700;}
 .pack-coin{font-size:2rem;display:block;margin-bottom:8px;}
 .pack-amt{font-size:1.4rem;font-weight:900;color:var(--gold);}
-.pack-bonus{font-size:.65rem;color:var(--gold-dark);margin-bottom:8px;min-height:16px;}
-.pack-price{font-size:1.05rem;font-weight:700;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.pack-bonus{font-size:.64rem;color:var(--gdark);margin-bottom:8px;min-height:16px;}
+.pack-price{font-size:1.05rem;font-weight:700;background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
-/* ── PLANS ── */
-.plans-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px;align-items:start;}
-.plan{background:rgba(28,24,53,.7);border:1px solid var(--div);border-radius:24px;padding:28px;
-  transition:.35s;position:relative;}
+.plans-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:54px;align-items:start;}
+.plan{background:rgba(28,24,53,.7);border:1px solid var(--div);border-radius:24px;padding:28px;transition:.35s;position:relative;}
 .plan:hover{transform:translateY(-5px);}
-.plan.gold{background:linear-gradient(155deg,rgba(28,18,0,.95),rgba(19,15,0,.95),rgba(28,24,53,.8));
-  border-color:rgba(255,215,64,.28);box-shadow:0 0 60px rgba(255,215,64,.07);}
-.plan-rib{position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#000;
-  padding:4px 18px;border-radius:0 0 12px 12px;font-size:.66rem;font-weight:700;}
+.plan.gold{background:linear-gradient(155deg,rgba(30,20,0,.95),rgba(20,14,0,.95),rgba(28,24,53,.8));border-color:rgba(255,215,64,.28);box-shadow:0 0 60px rgba(255,215,64,.07);}
+.plan-rib{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gdark));color:#000;padding:4px 18px;border-radius:0 0 12px 12px;font-size:.66rem;font-weight:700;}
 .plan-head{text-align:center;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--div);}
 .plan-em{font-size:2rem;margin-bottom:8px;display:block;}
-.plan-nm{font-size:.97rem;font-weight:700;}
+.plan-nm{font-size:.96rem;font-weight:700;}
 .plan-pr{font-size:2.4rem;font-weight:900;margin:9px 0 2px;}
 .plan-cur{font-size:.85rem;color:var(--muted);vertical-align:super;}
 .plan-per{font-size:.73rem;color:var(--muted);}
 .plan-ul{list-style:none;margin-bottom:22px;}
-.plan-ul li{padding:7px 0;border-bottom:1px solid var(--div);font-size:.82rem;
-  color:var(--grey);display:flex;align-items:center;gap:8px;}
-.plan-ul li::before{content:'';width:14px;height:14px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--pink),var(--purple));}
+.plan-ul li{padding:7px 0;border-bottom:1px solid var(--div);font-size:.82rem;color:var(--grey);display:flex;align-items:center;gap:8px;}
+.plan-ul li::before{content:'';width:14px;height:14px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--pink),var(--purple));}
 .plan-ul li.gf{color:var(--gold);}
-.plan-ul li.gf::before{background:linear-gradient(135deg,var(--gold),var(--gold-dark));}
-.plan-bpk{width:100%;padding:13px;border-radius:13px;font-weight:700;font-size:.9rem;
-  cursor:pointer;font-family:'Cairo',sans-serif;transition:.3s;border:none;}
-.plan-bpk.fr{background:rgba(255,255,255,.06);border:1px solid var(--div);color:#fff;}
-.plan-bpk.gd{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#000;}
-.plan-bpk.gd:hover{box-shadow:0 8px 32px rgba(255,215,64,.4);transform:translateY(-2px);}
+.plan-ul li.gf::before{background:linear-gradient(135deg,var(--gold),var(--gdark));}
+.plan-btn{width:100%;padding:13px;border-radius:13px;font-weight:700;font-size:.9rem;cursor:pointer;font-family:'Cairo',sans-serif;transition:.3s;border:none;}
+.plan-btn.fr{background:rgba(255,255,255,.06);border:1px solid var(--div);color:#fff;}
+.plan-btn.gd{background:linear-gradient(135deg,var(--gold),var(--gdark));color:#000;}
+.plan-btn.gd:hover{box-shadow:0 8px 32px rgba(255,215,64,.4);transform:translateY(-2px);}
 
-/* ── REVIEWS ── */
-.rv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;}
-.rv{background:rgba(28,24,53,.7);border:1px solid var(--div);border-radius:22px;
-  padding:24px;transition:.3s;}
-.rv:hover{border-color:rgba(123,47,190,.28);transform:translateY(-4px);}
+.rv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px;}
+.rv{background:rgba(28,24,53,.7);border:1px solid var(--div);border-radius:22px;padding:24px;transition:.3s;}
+.rv:hover{border-color:rgba(123,47,190,.26);transform:translateY(-4px);}
 .rv-stars{font-size:.9rem;color:var(--gold);margin-bottom:9px;}
-.rv-txt{color:var(--muted);font-size:.82rem;line-height:1.75;margin-bottom:16px;}
+.rv-txt{color:var(--muted);font-size:.83rem;line-height:1.75;margin-bottom:16px;}
 .rv-auth{display:flex;align-items:center;gap:10px;}
-.rv-av{width:40px;height:40px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  display:flex;align-items:center;justify-content:center;font-weight:700;}
+.rv-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;}
 .rv-nm{font-weight:700;font-size:.85rem;}
 .rv-ro{color:var(--muted);font-size:.7rem;}
 
-/* ── FINAL CTA ── */
-.final{text-align:center;padding:130px 5%;position:relative;}
-.final-orb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:600px;height:350px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(ellipse,rgba(123,47,190,.15),transparent 65%);}
-.final h2{font-size:clamp(2rem,4vw,3.3rem);font-weight:900;margin-bottom:17px;
-  line-height:1.12;position:relative;z-index:1;}
-.final p{color:var(--grey);font-size:.98rem;margin-bottom:38px;position:relative;z-index:1;}
+.final{text-align:center;padding:130px 5%;position:relative;z-index:1;}
+.final-orb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:620px;height:360px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse,rgba(123,47,190,.14),transparent 65%);}
+.final h2{font-size:clamp(2rem,4vw,3.3rem);font-weight:900;margin-bottom:18px;line-height:1.12;position:relative;z-index:1;}
+.final p{color:var(--grey);font-size:.98rem;margin-bottom:40px;position:relative;z-index:1;}
 .final-btns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
 
-/* ── FOOTER ── */
-footer{border-top:1px solid var(--div);background:rgba(28,24,53,.6);
-  padding:40px 8%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;}
-.fl{font-size:1.2rem;font-weight:900;}
+footer{border-top:1px solid var(--div);background:rgba(28,24,53,.6);padding:40px 8%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;}
+.fl{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:900;}
 .fc{display:flex;gap:24px;}
 .fc a{color:var(--muted);text-decoration:none;font-size:.8rem;transition:.25s;}
 .fc a:hover{color:#fff;}
-.fr{text-align:left;color:var(--muted);font-size:.74rem;}
+.fr-txt{text-align:left;color:var(--muted);font-size:.74rem;}
 
-/* ── SHARED ── */
 section{position:relative;z-index:1;}
 .container{max-width:1180px;margin:0 auto;padding:96px 5%;}
-.sec-tag{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:11px;}
+.sec-tag{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:11px;}
 .sec-title{font-size:clamp(1.8rem,3vw,2.55rem);font-weight:900;line-height:1.2;margin-bottom:12px;}
 .sec-sub{color:var(--grey);font-size:.95rem;line-height:1.85;max-width:500px;}
-[data-rv]{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+[data-rv]{opacity:0;transform:translateY(26px);transition:opacity .58s ease,transform .58s ease;}
 [data-rv].vis{opacity:1;transform:none;}
 
-/* ── RESPONSIVE ── */
 @media(max-width:960px){
   .hero{grid-template-columns:1fr;padding-top:84px;text-align:center;}
   .hero-p{margin:0 auto 36px;}
@@ -384,21 +248,37 @@ section{position:relative;z-index:1;}
   .bc.s3,.bc.s2{grid-column:span 1;grid-row:span 1;}
   .checkin-grid{grid-template-columns:1fr;}
   .packs-g{grid-template-columns:repeat(3,1fr);}
-  .plans-g,.rv-g{grid-template-columns:1fr;}
+  .plans-g{grid-template-columns:1fr;}
+  .rv-g{grid-template-columns:1fr;}
   .nav-links{display:none;}
   footer{grid-template-columns:1fr;text-align:center;}
   .fc{justify-content:center;}
-  .fr{text-align:center;}
+  .fr-txt{text-align:center;}
+}
+@media(max-width:480px){
+  .dramas-g{grid-template-columns:1fr 1fr;}
+  .packs-g{grid-template-columns:repeat(2,1fr);}
+  .hero h1{font-size:2.3rem;}
 }
 </style>
 </head>
 <body>
 <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="logo">
-    <div class="logo-mark">🎬</div>
+    <svg width="40" height="40" viewBox="0 0 42 42" fill="none" style="filter:drop-shadow(0 0 6px rgba(233,30,140,.5))" aria-label="ISKA DRAMA">
+      <defs>
+        <radialGradient id="g0" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#7B2FBE" stop-opacity="0.4"/><stop offset="100%" stop-color="#E91E8C" stop-opacity="0"/></radialGradient>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF6B00"/><stop offset="28%" stop-color="#E91E8C"/><stop offset="62%" stop-color="#CC44DD"/><stop offset="100%" stop-color="#4B0FC8"/></linearGradient>
+        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E91E8C"/><stop offset="100%" stop-color="#7B2FBE"/></linearGradient>
+        <filter id="gf1"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <circle cx="21" cy="21" r="20" fill="url(#g0)"/>
+      <path d="M 33 8.5 A 16.5 16.5 0 1 0 33.5 33.5" stroke="url(#g1)" stroke-width="2.8" fill="none" stroke-linecap="round" filter="url(#gf1)"/>
+      <path d="M 30.5 12 A 12 12 0 1 0 30.8 30.2" stroke="url(#g1)" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.55"/>
+      <line x1="31" y1="9.5" x2="21.5" y2="33" stroke="url(#g2)" stroke-width="2.5" stroke-linecap="round" filter="url(#gf1)"/>
+    </svg>
     <span class="logo-txt">ISKA DRAMA</span>
   </a>
   <ul class="nav-links">
@@ -426,7 +306,7 @@ section{position:relative;z-index:1;}
       <div class="htag"><span class="htag-dot" style="background:var(--purple)"></span>انتقام</div>
       <div class="htag"><span class="htag-dot" style="background:var(--gold)"></span>تاريخي</div>
       <div class="htag"><span class="htag-dot" style="background:#60A5FA"></span>خيال</div>
-      <div class="htag"><span class="htag-dot" style="background:#FF4B4B"></span>إثارة</div>
+      <div class="htag"><span class="htag-dot" style="background:var(--red)"></span>إثارة</div>
     </div>
   </div>
   <div class="hero-r">
@@ -437,18 +317,21 @@ section{position:relative;z-index:1;}
           <div class="ph-screen">
             <div class="ph-notch"></div>
             <div class="ph-bar"><span>ISKA DRAMA</span><span>🔋 98%</span></div>
-            <div class="ph-logo">ISKA DRAMA</div>
+            <div class="ph-logo-row">
+              <svg width="11" height="11" viewBox="0 0 42 42" fill="none"><defs><linearGradient id="plg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF6B00"/><stop offset="50%" stop-color="#E91E8C"/><stop offset="100%" stop-color="#4B0FC8"/></linearGradient></defs><path d="M 33 8.5 A 16.5 16.5 0 1 0 33.5 33.5" stroke="url(#plg)" stroke-width="3.5" fill="none" stroke-linecap="round"/><line x1="31" y1="9.5" x2="21.5" y2="33" stroke="#E91E8C" stroke-width="3" stroke-linecap="round"/></svg>
+              <span>ISKA DRAMA</span>
+            </div>
             <div class="ph-banner">
               <div class="ph-bdg">TRENDING</div>
               <div class="ph-btitle">قلب من حجر</div>
               <div class="ph-bsub">رومانسي · 80 حلقة · 2024</div>
-              <div class="ph-bstar">★★★★★ 4.8 · 12.4M</div>
+              <div class="ph-bstar">★★★★★ 4.8 · 12.4M مشاهدة</div>
             </div>
             <div class="ph-lbl">الأكثر مشاهدة</div>
             <div class="ph-row">
-              <div class="ph-c"><img src="https://picsum.photos/seed/d2/80/120" alt=""/><div class="ph-c-t">انتقام الملكة</div></div>
-              <div class="ph-c"><img src="https://picsum.photos/seed/d7/80/120" alt=""/><div class="ph-c-t">طبيب القلوب</div></div>
-              <div class="ph-c"><img src="https://picsum.photos/seed/d5/80/120" alt=""/><div class="ph-c-t">حب في الحرب</div></div>
+              <div class="ph-c"><img src="https://picsum.photos/seed/dk2/80/120" alt="مسلسل" width="80" height="120" loading="lazy"/><div class="ph-c-t">انتقام الملكة</div></div>
+              <div class="ph-c"><img src="https://picsum.photos/seed/dk7/80/120" alt="مسلسل" width="80" height="120" loading="lazy"/><div class="ph-c-t">طبيب القلوب</div></div>
+              <div class="ph-c"><img src="https://picsum.photos/seed/dk5/80/120" alt="مسلسل" width="80" height="120" loading="lazy"/><div class="ph-c-t">حب في الحرب</div></div>
             </div>
             <div class="ph-nav">
               <div class="pni"><div class="pni-i">🏠</div><div class="pni-l a">الرئيسية</div></div>
@@ -470,23 +353,15 @@ section{position:relative;z-index:1;}
 <!-- TICKER -->
 <div class="ticker">
   <div class="tick-track">
-    <div class="ti">🎬 <em>قلب من حجر</em></div>
-    <div class="ti">👑 <em>انتقام الملكة</em></div>
-    <div class="ti">🌙 <em>أميرة الظل</em></div>
-    <div class="ti">⚔️ <em>خيانة في القصر</em></div>
-    <div class="ti">🌹 <em>حب في زمن الحرب</em></div>
-    <div class="ti">💎 <em>الوريث المجهول</em></div>
-    <div class="ti">❤️ <em>طبيب القلوب</em></div>
-    <div class="ti">🔥 <em>الجاسوسة الجميلة</em></div>
+    <div class="ti">🎬 <em>قلب من حجر</em></div><div class="ti">👑 <em>انتقام الملكة</em></div>
+    <div class="ti">🌙 <em>أميرة الظل</em></div><div class="ti">⚔️ <em>خيانة في القصر</em></div>
+    <div class="ti">🌹 <em>حب في زمن الحرب</em></div><div class="ti">💎 <em>الوريث المجهول</em></div>
+    <div class="ti">❤️ <em>طبيب القلوب</em></div><div class="ti">🔥 <em>الجاسوسة الجميلة</em></div>
     <div class="ti">🪙 <em>مكافآت يومية تصل 700</em></div>
-    <div class="ti">🎬 <em>قلب من حجر</em></div>
-    <div class="ti">👑 <em>انتقام الملكة</em></div>
-    <div class="ti">🌙 <em>أميرة الظل</em></div>
-    <div class="ti">⚔️ <em>خيانة في القصر</em></div>
-    <div class="ti">🌹 <em>حب في زمن الحرب</em></div>
-    <div class="ti">💎 <em>الوريث المجهول</em></div>
-    <div class="ti">❤️ <em>طبيب القلوب</em></div>
-    <div class="ti">🔥 <em>الجاسوسة الجميلة</em></div>
+    <div class="ti">🎬 <em>قلب من حجر</em></div><div class="ti">👑 <em>انتقام الملكة</em></div>
+    <div class="ti">🌙 <em>أميرة الظل</em></div><div class="ti">⚔️ <em>خيانة في القصر</em></div>
+    <div class="ti">🌹 <em>حب في زمن الحرب</em></div><div class="ti">💎 <em>الوريث المجهول</em></div>
+    <div class="ti">❤️ <em>طبيب القلوب</em></div><div class="ti">🔥 <em>الجاسوسة الجميلة</em></div>
     <div class="ti">🪙 <em>مكافآت يومية تصل 700</em></div>
   </div>
 </div>
@@ -505,59 +380,21 @@ section{position:relative;z-index:1;}
 <section id="dramas"><div class="container">
   <div class="sec-tag" data-rv>مكتبة المسلسلات</div>
   <h2 class="sec-title" data-rv>أشهر المسلسلات على ISKA DRAMA</h2>
-  <p class="sec-sub" data-rv>من الرومانسي إلى الإثارة — 8 مسلسلات حصرية مترجمة بـ 4 لغات</p>
+  <p class="sec-sub" data-rv>8 مسلسلات حصرية مترجمة بـ 4 لغات — رومانسي، انتقام، خيال، إثارة</p>
   <div class="dramas-g">
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d1/400/600" alt="قلب من حجر" loading="lazy" width="400" height="600"/>
-      <div class="dc-bdg tr">TRENDING</div>
-      <div class="dc-body"><div class="dc-gen">رومانسي</div><div class="dc-tit">قلب من حجر</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.8</span><span>12.4M</span><span>80 حلقة</span></div></div>
-    </div>
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d2/400/600" alt="انتقام الملكة" loading="lazy" width="400" height="600"/>
-      <div class="dc-bdg ht">HOT 🔥</div>
-      <div class="dc-body"><div class="dc-gen">انتقام</div><div class="dc-tit">انتقام الملكة</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.7</span><span>9.8M</span><span>60 حلقة</span></div></div>
-    </div>
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d7/400/600" alt="طبيب القلوب" loading="lazy" width="400" height="600"/>
-      <div class="dc-body"><div class="dc-gen">رومانسي</div><div class="dc-tit">طبيب القلوب</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.8</span><span>11.2M</span><span>70 حلقة</span></div></div>
-    </div>
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d5/400/600" alt="حب في زمن الحرب" loading="lazy" width="400" height="600"/>
-      <div class="dc-bdg cl">CLASSIC</div>
-      <div class="dc-body"><div class="dc-gen">تاريخي رومانسي</div><div class="dc-tit">حب في زمن الحرب</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.9</span><span>8.1M</span><span>100 حلقة</span></div></div>
-    </div>
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d3/400/600" alt="أميرة الظل" loading="lazy" width="400" height="600"/>
-      <div class="dc-bdg nw">NEW ✨</div>
-      <div class="dc-body"><div class="dc-gen">خيال</div><div class="dc-tit">أميرة الظل</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.6</span><span>7.2M</span><span>50 حلقة</span></div></div>
-    </div>
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d8/400/600" alt="الجاسوسة الجميلة" loading="lazy" width="400" height="600"/>
-      <div class="dc-bdg ht">HOT 🔥</div>
-      <div class="dc-body"><div class="dc-gen">إثارة</div><div class="dc-tit">الجاسوسة الجميلة</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.3</span><span>4.9M</span><span>40 حلقة</span></div></div>
-    </div>
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d4/400/600" alt="خيانة في القصر" loading="lazy" width="400" height="600"/>
-      <div class="dc-body"><div class="dc-gen">خيانة</div><div class="dc-tit">خيانة في القصر</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.5</span><span>5.5M</span><span>45 حلقة</span></div></div>
-    </div>
-    <div class="dc" data-rv>
-      <img src="https://picsum.photos/seed/d6/400/600" alt="الوريث المجهول" loading="lazy" width="400" height="600"/>
-      <div class="dc-bdg ex">EXCL 💎</div>
-      <div class="dc-body"><div class="dc-gen">دراما</div><div class="dc-tit">الوريث المجهول</div>
-      <div class="dc-meta"><span class="dc-star">★ 4.4</span><span>6.3M</span><span>55 حلقة</span></div></div>
-    </div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska1/400/600" alt="قلب من حجر" loading="lazy" width="400" height="600"/><div class="dc-bdg bdg-tr">TRENDING</div></div><div class="dc-body"><div class="dc-gen">رومانسي</div><div class="dc-tit">قلب من حجر</div><div class="dc-meta"><span class="dc-star">★ 4.8</span><span>12.4M مشاهدة</span><span>80 حلقة</span></div></div></div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska2/400/600" alt="انتقام الملكة" loading="lazy" width="400" height="600"/><div class="dc-bdg bdg-ht">HOT 🔥</div></div><div class="dc-body"><div class="dc-gen">انتقام</div><div class="dc-tit">انتقام الملكة</div><div class="dc-meta"><span class="dc-star">★ 4.7</span><span>9.8M مشاهدة</span><span>60 حلقة</span></div></div></div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska7/400/600" alt="طبيب القلوب" loading="lazy" width="400" height="600"/></div><div class="dc-body"><div class="dc-gen">رومانسي</div><div class="dc-tit">طبيب القلوب</div><div class="dc-meta"><span class="dc-star">★ 4.8</span><span>11.2M مشاهدة</span><span>70 حلقة</span></div></div></div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska5/400/600" alt="حب في زمن الحرب" loading="lazy" width="400" height="600"/><div class="dc-bdg bdg-cl">CLASSIC</div></div><div class="dc-body"><div class="dc-gen">تاريخي رومانسي</div><div class="dc-tit">حب في زمن الحرب</div><div class="dc-meta"><span class="dc-star">★ 4.9</span><span>8.1M مشاهدة</span><span>100 حلقة</span></div></div></div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska3/400/600" alt="أميرة الظل" loading="lazy" width="400" height="600"/><div class="dc-bdg bdg-nw">NEW ✨</div></div><div class="dc-body"><div class="dc-gen">خيال</div><div class="dc-tit">أميرة الظل</div><div class="dc-meta"><span class="dc-star">★ 4.6</span><span>7.2M مشاهدة</span><span>50 حلقة</span></div></div></div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska8/400/600" alt="الجاسوسة الجميلة" loading="lazy" width="400" height="600"/><div class="dc-bdg bdg-ht">HOT 🔥</div></div><div class="dc-body"><div class="dc-gen">إثارة</div><div class="dc-tit">الجاسوسة الجميلة</div><div class="dc-meta"><span class="dc-star">★ 4.3</span><span>4.9M مشاهدة</span><span>40 حلقة</span></div></div></div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska4/400/600" alt="خيانة في القصر" loading="lazy" width="400" height="600"/></div><div class="dc-body"><div class="dc-gen">خيانة</div><div class="dc-tit">خيانة في القصر</div><div class="dc-meta"><span class="dc-star">★ 4.5</span><span>5.5M مشاهدة</span><span>45 حلقة</span></div></div></div>
+    <div class="dc" data-rv><div class="dc-img-wrap"><img src="https://picsum.photos/seed/iska6/400/600" alt="الوريث المجهول" loading="lazy" width="400" height="600"/><div class="dc-bdg bdg-ex">EXCL 💎</div></div><div class="dc-body"><div class="dc-gen">دراما</div><div class="dc-tit">الوريث المجهول</div><div class="dc-meta"><span class="dc-star">★ 4.4</span><span>6.3M مشاهدة</span><span>55 حلقة</span></div></div></div>
   </div>
 </div></section>
 
 <!-- FEATURES BENTO -->
-<section id="features" style="background:rgba(28,24,53,.3);"><div class="container">
+<section id="features" style="background:rgba(28,24,53,.25);"><div class="container">
   <div class="sec-tag" data-rv>مزايا التطبيق</div>
   <h2 class="sec-title" data-rv>كل ما تحتاجه في تطبيق واحد</h2>
   <div class="bento">
@@ -565,70 +402,43 @@ section{position:relative;z-index:1;}
       <span class="bc-i">🎬</span>
       <div class="bc-tag">المكتبة</div>
       <h3>مكتبة ضخمة — أكثر من 8,000 حلقة</h3>
-      <p>دراما كورية، تركية، عربية مترجمة بـ 4 لغات: عربي، إنجليزي، فرنسي، تركي. حلقات جديدة تضاف باستمرار.</p>
+      <p>دراما كورية، تركية، عربية مترجمة بـ 4 لغات: عربي، إنجليزي، فرنسي، تركي.</p>
       <div class="bc-big">+8,000</div>
       <p style="color:var(--muted);font-size:.76rem;">حلقة جاهزة للمشاهدة الآن</p>
     </div>
-    <div class="bc s2" data-rv>
-      <span class="bc-i">🪙</span>
-      <div class="bc-tag">العملات</div>
-      <h3>اكسب واستخدم مجاناً</h3>
-      <p>10 عملات فقط لفتح أي حلقة. اكسبها يومياً بدون دفع.</p>
-    </div>
-    <div class="bc s2" data-rv>
-      <span class="bc-i">👑</span>
-      <div class="bc-tag">العضوية الذهبية</div>
-      <h3>وصول كامل بلا حدود</h3>
-      <p>شاهد بدون إعلانات مع مضاعفة مكافآتك ومكتبة حصرية.</p>
-    </div>
-    <div class="bc s2" data-rv>
-      <span class="bc-i">📅</span>
-      <h3>تسجيل يومي</h3>
-      <p>سجّل كل يوم واحصل على مكافآت تصل إلى 700 عملة في اليوم السابع.</p>
-    </div>
-    <div class="bc s2" data-rv>
-      <span class="bc-i">📺</span>
-      <h3>جودة HD</h3>
-      <p>مشاهدة بجودة عالية مع ترجمة دقيقة بـ 4 لغات.</p>
-    </div>
+    <div class="bc s2" data-rv><span class="bc-i">🪙</span><div class="bc-tag">نظام العملات</div><h3>اكسب واستخدم مجاناً</h3><p>10 عملات فقط لفتح أي حلقة — اكسبها يومياً بدون أي دفع.</p></div>
+    <div class="bc s2" data-rv><span class="bc-i">👑</span><div class="bc-tag">العضوية الذهبية</div><h3>وصول كامل بلا حدود</h3><p>شاهد بدون إعلانات مع مضاعفة مكافآتك ومحتوى حصري.</p></div>
+    <div class="bc s2" data-rv><span class="bc-i">📅</span><h3>تسجيل يومي</h3><p>سجّل حضورك كل يوم واحصل على مكافآت تصل إلى 700 عملة في اليوم السابع.</p></div>
+    <div class="bc s2" data-rv><span class="bc-i">🌍</span><h3>4 لغات</h3><p>عربي، إنجليزي، فرنسي، تركي — اختر لغتك المفضلة لكل مسلسل.</p></div>
   </div>
 </div></section>
 
 <!-- DAILY CHECK-IN -->
-<section class="checkin-sec" id="checkin"><div class="container">
+<section id="checkin" style="background:rgba(28,24,53,.4);"><div class="container">
   <div class="sec-tag" data-rv>تسجيل الحضور</div>
   <h2 class="sec-title" data-rv>افتح التطبيق يومياً واكسب أكثر</h2>
-  <p class="sec-sub" data-rv>نظام مكافآت تصاعدي — كل يوم متتالي يزيد مكافأتك حتى 700 عملة</p>
+  <p class="sec-sub" data-rv>نظام مكافآت تصاعدي — كل يوم متتالي يزيد مكافأتك حتى 700 عملة في اليوم السابع</p>
   <div class="checkin-grid">
-    <!-- Dialog Preview -->
     <div class="dialog-preview" data-rv>
       <div class="dp-head">
         <div class="dp-icon">🎁</div>
         <div class="dp-title">مكافأة اليوم 7 🎁</div>
-        <div class="dp-sub">أحسنت! واصل حضورك اليومي</div>
+        <div class="dp-sub">أسبوع كامل! مبروك 🏆</div>
         <div class="dp-streak">
-          <div class="ds-day done">✓</div>
-          <div class="ds-day done">✓</div>
-          <div class="ds-day done">✓</div>
-          <div class="ds-day done">✓</div>
-          <div class="ds-day done">✓</div>
-          <div class="ds-day done">✓</div>
-          <div class="ds-day today">✓</div>
+          <div class="ds-d done">✓</div><div class="ds-d done">✓</div><div class="ds-d done">✓</div>
+          <div class="ds-d done">✓</div><div class="ds-d done">✓</div><div class="ds-d done">✓</div>
+          <div class="ds-d today">✓</div>
         </div>
       </div>
       <div class="dp-body">
         <div class="dp-reward">
-          <div>
-            <div class="dp-r-val">+700 🪙</div>
-            <div class="dp-r-lbl">مكافأة الحضور اليومي</div>
-          </div>
+          <div><div class="dp-r-val">+700 🪙</div><div class="dp-r-lbl">مكافأة الحضور اليومي</div></div>
           <div class="dp-r-coin">🪙</div>
         </div>
         <button class="dp-btn">استلم مكافأتك 🎁</button>
         <span class="dp-skip">لاحقاً</span>
       </div>
     </div>
-    <!-- Rewards List -->
     <div>
       <div class="rw-list">
         <div class="rw" data-rv><span class="rw-e">1️⃣</span><div class="rw-info"><h4>اليوم الأول</h4><p>ابدأ رحلة المكافآت</p></div><div class="rw-amt">+100</div></div>
@@ -637,9 +447,7 @@ section{position:relative;z-index:1;}
         <div class="rw" data-rv><span class="rw-e">4️⃣</span><div class="rw-info"><h4>اليوم الرابع</h4><p>أكثر من نصف الأسبوع</p></div><div class="rw-amt">+400</div></div>
         <div class="rw" data-rv><span class="rw-e">5️⃣</span><div class="rw-info"><h4>اليوم الخامس</h4><p>قريب من القمة</p></div><div class="rw-amt">+500</div></div>
         <div class="rw" data-rv><span class="rw-e">6️⃣</span><div class="rw-info"><h4>اليوم السادس</h4><p>خطوة واحدة بقيت!</p></div><div class="rw-amt">+600</div></div>
-        <div class="rw" data-rv style="border-color:rgba(255,215,64,.3);background:rgba(255,215,64,.04);">
-          <span class="rw-e">👑</span><div class="rw-info"><h4>اليوم السابع 🏆</h4><p>أسبوع كامل — المكافأة الكبرى!</p></div><div class="rw-amt" style="font-size:1.1rem;">+700</div>
-        </div>
+        <div class="rw" data-rv style="border-color:rgba(255,215,64,.3);background:rgba(255,215,64,.04);"><span class="rw-e">👑</span><div class="rw-info"><h4>اليوم السابع 🏆</h4><p>أسبوع كامل — المكافأة الكبرى!</p></div><div class="rw-amt" style="font-size:1.1rem;">+700</div></div>
       </div>
     </div>
   </div>
@@ -649,83 +457,54 @@ section{position:relative;z-index:1;}
 <section id="coins"><div class="container">
   <div class="sec-tag" data-rv>باقات العملات</div>
   <h2 class="sec-title" data-rv>اشترِ عملات إضافية</h2>
-  <p class="sec-sub" data-rv>5 باقات مختلفة — كل 10 عملات تفتح حلقة كاملة</p>
+  <p class="sec-sub" data-rv>5 باقات — كل 10 عملات تفتح حلقة كاملة</p>
   <div class="packs-g">
-    <div class="pack" data-rv>
-      <span class="pack-coin">🪙</span>
-      <div class="pack-amt">100</div>
-      <div class="pack-bonus" style="opacity:0">—</div>
-      <div class="pack-price">$0.99</div>
-    </div>
-    <div class="pack" data-rv>
-      <span class="pack-coin">🪙</span>
-      <div class="pack-amt">500</div>
-      <div class="pack-bonus">+ 50 مجاناً</div>
-      <div class="pack-price">$3.99</div>
-    </div>
-    <div class="pack best" data-rv>
-      <div class="pack-ribbon">الأفضل قيمة</div>
-      <span class="pack-coin">🪙</span>
-      <div class="pack-amt" style="color:var(--gold)">1,200</div>
-      <div class="pack-bonus" style="color:var(--gold-dark)">+ 200 مجاناً</div>
-      <div class="pack-price">$6.99</div>
-    </div>
-    <div class="pack" data-rv>
-      <span class="pack-coin">🪙</span>
-      <div class="pack-amt">3,800</div>
-      <div class="pack-bonus">+ 800 مجاناً</div>
-      <div class="pack-price">$17.99</div>
-    </div>
-    <div class="pack" data-rv>
-      <span class="pack-coin">🪙</span>
-      <div class="pack-amt">6,500</div>
-      <div class="pack-bonus">+ 1,500 مجاناً</div>
-      <div class="pack-price">$24.99</div>
-    </div>
+    <div class="pack" data-rv><span class="pack-coin">🪙</span><div class="pack-amt">100</div><div class="pack-bonus" style="opacity:0">—</div><div class="pack-price">$0.99</div></div>
+    <div class="pack" data-rv><span class="pack-coin">🪙</span><div class="pack-amt">500</div><div class="pack-bonus">+50 مجاناً 🎁</div><div class="pack-price">$3.99</div></div>
+    <div class="pack best" data-rv><div class="pack-rib">الأفضل قيمة</div><span class="pack-coin">🪙</span><div class="pack-amt" style="color:var(--gold)">1,200</div><div class="pack-bonus">+200 مجاناً 🎁</div><div class="pack-price">$6.99</div></div>
+    <div class="pack" data-rv><span class="pack-coin">🪙</span><div class="pack-amt">3,800</div><div class="pack-bonus">+800 مجاناً 🎁</div><div class="pack-price">$17.99</div></div>
+    <div class="pack" data-rv><span class="pack-coin">🪙</span><div class="pack-amt">6,500</div><div class="pack-bonus">+1,500 مجاناً 🎁</div><div class="pack-price">$24.99</div></div>
   </div>
 </div></section>
 
 <!-- MEMBERSHIP -->
-<section style="background:rgba(28,24,53,.3);" id="membership"><div class="container">
+<section id="membership" style="background:rgba(28,24,53,.3);"><div class="container">
   <div style="text-align:center;">
     <div class="sec-tag" data-rv>خطط الاشتراك</div>
     <h2 class="sec-title" data-rv>اختر عضويتك</h2>
   </div>
   <div class="plans-g">
     <div class="plan" data-rv>
-      <div class="plan-head"><span class="plan-em">🆓</span><div class="plan-nm">مجاني</div>
-      <div class="plan-pr">0<span class="plan-per"> / للأبد</span></div></div>
+      <div class="plan-head"><span class="plan-em">🆓</span><div class="plan-nm">مجاني</div><div class="plan-pr">0<span class="plan-per"> / للأبد</span></div></div>
       <ul class="plan-ul">
         <li>مشاهدة بالعملات المكتسبة</li>
         <li>مكافآت يومية كاملة</li>
-        <li>50 عملة هدية ترحيبية</li>
+        <li>+50 عملة هدية ترحيبية</li>
         <li>تصفح كامل للمكتبة</li>
       </ul>
-      <button class="plan-bpk fr">ابدأ مجاناً</button>
+      <button class="plan-btn fr">ابدأ مجاناً</button>
     </div>
     <div class="plan gold" data-rv>
       <div class="plan-rib">الأكثر شعبية</div>
-      <div class="plan-head"><span class="plan-em">👑</span><div class="plan-nm">ذهبي أسبوعي</div>
-      <div class="plan-pr"><span class="plan-cur">$</span>2.99<span class="plan-per"> / أسبوع</span></div></div>
+      <div class="plan-head"><span class="plan-em">👑</span><div class="plan-nm">ذهبي أسبوعي</div><div class="plan-pr"><span class="plan-cur">$</span>2.99<span class="plan-per"> / أسبوع</span></div></div>
       <ul class="plan-ul">
         <li class="gf">مشاهدة غير محدودة بدون إعلانات</li>
         <li class="gf">جودة HD كاملة</li>
         <li class="gf">+100 عملة هدية ترحيبية</li>
         <li class="gf">مكافآت يومية مضاعفة</li>
-        <li>محتوى حصري</li>
+        <li>محتوى وحلقات حصرية</li>
       </ul>
-      <button class="plan-bpk gd">اشترك الآن</button>
+      <button class="plan-btn gd">اشترك الآن 👑</button>
     </div>
     <div class="plan gold" data-rv>
-      <div class="plan-head"><span class="plan-em">💎</span><div class="plan-nm">ذهبي سنوي</div>
-      <div class="plan-pr"><span class="plan-cur">$</span>19.99<span class="plan-per"> / سنة</span></div></div>
+      <div class="plan-head"><span class="plan-em">💎</span><div class="plan-nm">ذهبي سنوي</div><div class="plan-pr"><span class="plan-cur">$</span>19.99<span class="plan-per"> / سنة</span></div></div>
       <ul class="plan-ul">
         <li class="gf">كل مزايا الذهبي الأسبوعي</li>
         <li class="gf">+500 عملة هدية ترحيبية</li>
         <li class="gf">وفّر 83% مقارنة بالأسبوعي</li>
         <li>تحميل الحلقات offline</li>
       </ul>
-      <button class="plan-bpk gd">أفضل قيمة 💎</button>
+      <button class="plan-btn gd">أفضل قيمة 💎</button>
     </div>
   </div>
   <p style="text-align:center;color:var(--muted);font-size:.76rem;margin-top:18px;">تتجدد العضوية تلقائياً ويمكنك إلغاؤها في أي وقت</p>
@@ -738,9 +517,9 @@ section{position:relative;z-index:1;}
     <h2 class="sec-title" data-rv>50,000+ شخص يثقون بـ ISKA DRAMA</h2>
   </div>
   <div class="rv-g">
-    <div class="rv" data-rv><div class="rv-stars">★★★★★</div><p class="rv-txt">"أفضل تطبيق دراما جربته! نظام العملات رائع، كل يوم أدخل التطبيق لأجمع مكافأتي اليومية."</p><div class="rv-auth"><div class="rv-av">س</div><div><div class="rv-nm">سارة م.</div><div class="rv-ro">عضو ذهبي · 6 أشهر</div></div></div></div>
-    <div class="rv" data-rv><div class="rv-stars">★★★★★</div><p class="rv-txt">"الترجمة ممتازة بـ 4 لغات والجودة عالية. اشتركت بالعضوية الذهبية السنوية وما ندمت!"</p><div class="rv-auth"><div class="rv-av">أ</div><div><div class="rv-nm">أحمد ك.</div><div class="rv-ro">عضو ذهبي سنوي</div></div></div></div>
-    <div class="rv" data-rv><div class="rv-stars">★★★★☆</div><p class="rv-txt">"قلب من حجر وطبيب القلوب من أجمل ما شاهدت. التطبيق سريع وما فيه تعقيد."</p><div class="rv-auth"><div class="rv-av">ن</div><div><div class="rv-nm">نور ع.</div><div class="rv-ro">مستخدمة جديدة</div></div></div></div>
+    <div class="rv" data-rv><div class="rv-stars">★★★★★</div><p class="rv-txt">"أفضل تطبيق دراما جربته! نظام العملات اليومية رائع — كل صباح أول شيء أفتحه لأجمع مكافأتي."</p><div class="rv-auth"><div class="rv-av">س</div><div><div class="rv-nm">سارة م.</div><div class="rv-ro">عضو ذهبي · 6 أشهر</div></div></div></div>
+    <div class="rv" data-rv><div class="rv-stars">★★★★★</div><p class="rv-txt">"الترجمة ممتازة بـ 4 لغات والجودة عالية. اشتركت بالعضوية الذهبية السنوية وما ندمت والله!"</p><div class="rv-auth"><div class="rv-av">أ</div><div><div class="rv-nm">أحمد ك.</div><div class="rv-ro">عضو ذهبي سنوي</div></div></div></div>
+    <div class="rv" data-rv><div class="rv-stars">★★★★☆</div><p class="rv-txt">"قلب من حجر وطبيب القلوب من أجمل ما شاهدت. التطبيق سريع وسهل وما فيه تعقيد."</p><div class="rv-auth"><div class="rv-av">ن</div><div><div class="rv-nm">نور ع.</div><div class="rv-ro">مستخدمة جديدة</div></div></div></div>
   </div>
 </div></section>
 
@@ -748,41 +527,53 @@ section{position:relative;z-index:1;}
 <section class="final">
   <div class="final-orb"></div>
   <h2 data-rv>ابدأ مشاهدتك مع<br/><span class="grad">ISKA DRAMA</span> اليوم</h2>
-  <p data-rv>حمّل مجاناً واحصل على <strong style="color:var(--gold)">50 عملة</strong> هدية ترحيبية فور التسجيل</p>
+  <p data-rv>حمّل مجاناً واحصل على <strong style="color:var(--gold)">50 عملة 🪙</strong> هدية ترحيبية فور التسجيل</p>
   <div class="final-btns" data-rv>
-    <a href="#" class="btn-pk" style="font-size:1rem;padding:15px 38px;">⬇ حمّل مجاناً الآن</a>
-    <a href="#membership" class="btn-gh" style="font-size:1rem;padding:15px 38px;">👑 العضوية الذهبية</a>
+    <a href="#" class="btn-pk" style="font-size:1rem;padding:15px 40px;">⬇ حمّل مجاناً الآن</a>
+    <a href="#membership" class="btn-gh" style="font-size:1rem;padding:15px 40px;">👑 العضوية الذهبية</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="fl">🎬 <span style="background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">ISKA DRAMA</span></div>
-  <div class="fc"><a href="#">الخصوصية</a><a href="#">الشروط</a><a href="#">تواصل معنا</a></div>
-  <div class="fr">© 2026 Iska Drama. جميع الحقوق محفوظة.</div>
+  <div class="fl">
+    <svg width="32" height="32" viewBox="0 0 42 42" fill="none" style="filter:drop-shadow(0 0 5px rgba(233,30,140,.45))">
+      <defs>
+        <radialGradient id="fg"><stop offset="0%" stop-color="#7B2FBE" stop-opacity="0.35"/><stop offset="100%" stop-color="#E91E8C" stop-opacity="0"/></radialGradient>
+        <linearGradient id="fr2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF6B00"/><stop offset="28%" stop-color="#E91E8C"/><stop offset="62%" stop-color="#CC44DD"/><stop offset="100%" stop-color="#4B0FC8"/></linearGradient>
+        <linearGradient id="fs2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E91E8C"/><stop offset="100%" stop-color="#7B2FBE"/></linearGradient>
+      </defs>
+      <circle cx="21" cy="21" r="20" fill="url(#fg)"/>
+      <path d="M 33 8.5 A 16.5 16.5 0 1 0 33.5 33.5" stroke="url(#fr2)" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+      <path d="M 30.5 12 A 12 12 0 1 0 30.8 30.2" stroke="url(#fr2)" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <line x1="31" y1="9.5" x2="21.5" y2="33" stroke="url(#fs2)" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <span style="background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">ISKA DRAMA</span>
+  </div>
+  <div class="fc">
+    <a href="#" target="_blank" rel="noopener noreferrer">الخصوصية</a>
+    <a href="#" target="_blank" rel="noopener noreferrer">الشروط</a>
+    <a href="#" target="_blank" rel="noopener noreferrer">تواصل معنا</a>
+  </div>
+  <div class="fr-txt">© 2026 Iska Drama. جميع الحقوق محفوظة.</div>
 </footer>
 
 <script>
-// Scroll reveal
 const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');ro.unobserve(x.target);}});},{threshold:.1});
 document.querySelectorAll('[data-rv]').forEach(el=>ro.observe(el));
 
-// Counters
-const co=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;
-  const el=x.target,t=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||0),suf=el.dataset.suffix||'';
-  let v=0,step=t/80;
-  const ti=setInterval(()=>{v=Math.min(v+step,t);
-    el.textContent=(dec?v.toFixed(dec):Math.floor(v).toLocaleString('ar'))+suf;
-    if(v>=t)clearInterval(ti);},16);
-  co.unobserve(el);});},{threshold:.5});
+const co=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(!x.isIntersecting)return;
+    const el=x.target,t=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||0),suf=el.dataset.suffix||'';
+    let v=0,step=t/80;
+    const ti=setInterval(()=>{v=Math.min(v+step,t);el.textContent=(dec?v.toFixed(dec):Math.floor(v).toLocaleString('ar'))+suf;if(v>=t)clearInterval(ti);},16);
+    co.unobserve(el);
+  });
+},{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
 
-// Nav
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>60));
 </script>
 </body>
-</html>'''
-
-with open('/root/output/index.html', 'w', encoding='utf-8') as f:
-    f.write(html)
-print("✅ Done:", len(html), "chars")
+</html>
