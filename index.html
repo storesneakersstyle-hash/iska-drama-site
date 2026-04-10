@@ -1,368 +1,721 @@
-<!DOCTYPE html>
+
+html = '''<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Iska Drama — عالم الدراما لا ينتهي</title>
+<title>ISKA DRAMA — عالم الدراما لا ينتهي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#050408;
-  --surface:#0D0B14;
-  --surface2:#13101E;
-  --border:rgba(255,255,255,0.07);
-  --pink:#FF2D78;
-  --purple:#8B5CF6;
-  --gold:#F59E0B;
-  --gold2:#FCD34D;
-  --text:#F5F0FF;
-  --muted:#7C6FA0;
-  --glow-pink:rgba(255,45,120,0.4);
-  --glow-purple:rgba(139,92,246,0.4);
+  --bg:#08080F;
+  --surf:#111120;
+  --card:#1A1A2E;
+  --pink:#E91E8C;
+  --purple:#6C3FC5;
+  --gold:#C9A84C;
+  --gold2:#E8C66A;
+  --green:#00C853;
+  --white:#FFFFFF;
+  --grey:#9E9E9E;
+  --muted:#616161;
+  --div:#2A2A40;
+  --glow-pink:rgba(233,30,140,0.35);
+  --glow-purple:rgba(108,63,197,0.35);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4;}
+body{background:var(--bg);color:var(--white);font-family:'Cairo',sans-serif;overflow-x:hidden;}
+
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ORBS */
 .orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:drift 15s ease-in-out infinite;}
-.orb1{width:600px;height:600px;background:rgba(139,92,246,0.12);top:-200px;right:-200px;animation-delay:0s;}
-.orb2{width:500px;height:500px;background:rgba(255,45,120,0.1);bottom:-100px;left:-100px;animation-delay:-7s;}
-.orb3{width:300px;height:300px;background:rgba(245,158,11,0.06);top:50%;left:50%;animation-delay:-3s;}
-@keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-40px) scale(1.05);}66%{transform:translate(-20px,30px) scale(0.95);}}
-nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 5%;height:70px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,4,8,0.6);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);transition:.3s;}
-.logo{display:flex;align-items:center;gap:10px;font-size:1.5rem;font-weight:900;}
-.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 20px var(--glow-pink);}
-.logo-text{background:linear-gradient(135deg,#fff,rgba(255,255,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.nav-center{display:flex;gap:32px;list-style:none;}
-.nav-center a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:.3s;position:relative;}
-.nav-center a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--purple));transition:.3s;}
-.nav-center a:hover{color:var(--text);}
-.nav-center a:hover::after{width:100%;}
-.nav-right{display:flex;align-items:center;gap:14px;}
-.btn-nav-dl{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;padding:9px 22px;border-radius:50px;font-weight:700;font-size:.85rem;text-decoration:none;box-shadow:0 4px 20px var(--glow-pink);transition:.3s;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
-.btn-nav-dl:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--glow-pink);}
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:100px 8% 60px;position:relative;z-index:1;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;background:rgba(255,45,120,0.08);border:1px solid rgba(255,45,120,0.2);padding:6px 14px;border-radius:50px;}
-.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);animation:blink 1.5s ease infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-.eyebrow-text{font-size:.78rem;color:var(--pink);font-weight:600;letter-spacing:1.5px;}
-.hero h1{font-size:clamp(2.8rem,5vw,4.4rem);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-1px;}
-.grad-text{background:linear-gradient(135deg,var(--pink) 0%,var(--purple) 50%,#60A5FA 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:grad-shift 4s ease infinite;}
-@keyframes grad-shift{0%,100%{background-position:0%;}50%{background-position:100%;}}
-.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.9;margin-bottom:36px;max-width:480px;}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;}
-.btn-hero-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;padding:15px 34px;border-radius:14px;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 8px 30px var(--glow-pink);transition:.3s;position:relative;overflow:hidden;}
-.btn-hero-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.15));transform:translateX(-100%);transition:.4s;}
-.btn-hero-primary:hover::before{transform:translateX(100%);}
-.btn-hero-primary:hover{transform:translateY(-3px);box-shadow:0 16px 50px var(--glow-pink);}
-.btn-hero-ghost{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:15px 34px;border-radius:14px;font-weight:700;font-size:1rem;text-decoration:none;transition:.3s;backdrop-filter:blur(10px);}
-.btn-hero-ghost:hover{background:rgba(255,255,255,0.08);border-color:rgba(139,92,246,0.4);}
-.hero-pills{display:flex;gap:10px;flex-wrap:wrap;}
-.pill{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);padding:6px 14px;border-radius:50px;font-size:.78rem;color:var(--muted);}
-.pill-dot{width:5px;height:5px;border-radius:50%;}
-.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;padding:40px 0;}
-.phone-scene{position:relative;width:260px;}
-.phone-glow-bg{position:absolute;inset:-60px;border-radius:50%;background:radial-gradient(ellipse,rgba(139,92,246,0.25),transparent 65%);animation:pulse-glow 3s ease-in-out infinite;}
-@keyframes pulse-glow{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
-.phone-outer{position:relative;z-index:2;border-radius:44px;padding:3px;background:linear-gradient(160deg,rgba(255,255,255,.15),rgba(255,255,255,.03),rgba(139,92,246,.2));box-shadow:0 40px 80px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.1);}
-.phone-inner{border-radius:41px;overflow:hidden;background:#000;}
-.phone-inner img{width:100%;display:block;}
-.phone-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:80px;height:26px;background:#000;border-radius:13px;z-index:3;}
-.f-pill{position:absolute;z-index:4;background:rgba(13,11,20,0.85);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:10px 14px;white-space:nowrap;}
-.f-pill.p1{top:20px;left:-80px;animation:fp 3s ease-in-out infinite;}
-.f-pill.p2{bottom:80px;right:-80px;animation:fp 3s ease-in-out infinite;animation-delay:-1.5s;}
-.f-pill.p3{bottom:180px;left:-70px;animation:fp 3s ease-in-out infinite;animation-delay:-.75s;}
-@keyframes fp{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.fp-label{font-size:.68rem;color:var(--muted);margin-bottom:2px;}
-.fp-val{font-size:.9rem;font-weight:700;}
-.fp-pink{color:var(--pink);}
-.fp-gold{color:var(--gold);}
-.fp-purple{color:var(--purple);}
-.ticker{position:relative;z-index:1;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:14px 0;}
-.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
-.ticker::before{left:0;background:linear-gradient(90deg,var(--surface),transparent);}
-.ticker::after{right:0;background:linear-gradient(-90deg,var(--surface),transparent);}
-.ticker-track{display:flex;gap:48px;animation:tick 25s linear infinite;}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);animation:drift 18s ease-in-out infinite;}
+.orb1{width:700px;height:700px;background:rgba(108,63,197,.1);top:-250px;right:-200px;}
+.orb2{width:500px;height:500px;background:rgba(233,30,140,.08);bottom:-100px;left:-150px;animation-delay:-9s;}
+.orb3{width:350px;height:350px;background:rgba(201,168,76,.05);top:40%;left:40%;animation-delay:-4s;}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(40px,-50px) scale(1.06);}66%{transform:translate(-25px,35px) scale(.94);}}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;height:66px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 6%;
+  background:rgba(8,8,15,.7);backdrop-filter:blur(28px) saturate(180%);
+  border-bottom:1px solid rgba(42,42,64,.8);transition:.3s;}
+nav.scrolled{background:rgba(8,8,15,.95);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-icon{width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+  box-shadow:0 4px 24px var(--glow-pink);}
+.logo-name{font-size:1.35rem;font-weight:900;
+  background:linear-gradient(135deg,#fff,rgba(255,255,255,.75));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{color:var(--grey);text-decoration:none;font-size:.88rem;transition:.25s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:linear-gradient(90deg,var(--pink),var(--purple));transition:.25s;}
+.nav-links a:hover{color:#fff;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#fff;padding:9px 22px;border-radius:50px;font-weight:700;font-size:.83rem;
+  text-decoration:none;box-shadow:0 4px 22px var(--glow-pink);transition:.3s;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 35px var(--glow-pink);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  align-items:center;padding:90px 7% 60px;position:relative;z-index:1;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
+  background:rgba(233,30,140,.08);border:1px solid rgba(233,30,140,.22);
+  padding:6px 14px;border-radius:50px;}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);
+  box-shadow:0 0 10px var(--pink);animation:blink 1.6s ease infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+.eyebrow-txt{font-size:.75rem;color:var(--pink);font-weight:700;letter-spacing:1.8px;text-transform:uppercase;}
+.hero h1{font-size:clamp(2.6rem,4.8vw,4.2rem);font-weight:900;line-height:1.08;margin-bottom:18px;letter-spacing:-.5px;}
+.grad{background:linear-gradient(135deg,var(--pink) 0%,var(--purple) 55%,#60A5FA 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;
+  animation:gshift 4s ease infinite;}
+@keyframes gshift{0%,100%{background-position:0%;}50%{background-position:100%;}}
+.hero-sub{font-size:1rem;color:var(--grey);line-height:1.9;margin-bottom:34px;max-width:460px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:46px;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#fff;padding:14px 32px;border-radius:14px;font-weight:700;font-size:.97rem;
+  text-decoration:none;box-shadow:0 8px 32px var(--glow-pink);transition:.3s;
+  position:relative;overflow:hidden;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
+.btn-primary::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent,rgba(255,255,255,.18));
+  transform:translateX(-100%);transition:.4s;}
+.btn-primary:hover::before{transform:translateX(100%);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 50px var(--glow-pink);}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.05);border:1px solid var(--div);
+  color:#fff;padding:14px 32px;border-radius:14px;font-weight:700;font-size:.97rem;
+  text-decoration:none;transition:.3s;backdrop-filter:blur(8px);}
+.btn-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(108,63,197,.45);}
+.hero-tags{display:flex;gap:9px;flex-wrap:wrap;}
+.htag{display:flex;align-items:center;gap:6px;background:var(--card);
+  border:1px solid var(--div);padding:5px 13px;border-radius:50px;
+  font-size:.75rem;color:var(--grey);}
+.htag-dot{width:5px;height:5px;border-radius:50%;}
+
+/* PHONE */
+.hero-right{position:relative;display:flex;justify-content:center;align-items:center;padding:30px 0;}
+.phone-wrap{position:relative;width:255px;}
+.phone-glow{position:absolute;inset:-70px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(108,63,197,.22),transparent 65%);
+  animation:pglow 3.2s ease-in-out infinite;}
+@keyframes pglow{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.12);}}
+.phone-frame{position:relative;z-index:2;border-radius:46px;padding:3px;
+  background:linear-gradient(155deg,rgba(255,255,255,.18),rgba(255,255,255,.03),rgba(108,63,197,.22));
+  box-shadow:0 50px 100px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.12);}
+.phone-inner{border-radius:43px;overflow:hidden;background:#000;aspect-ratio:9/19.5;}
+.phone-screen{width:100%;height:100%;background:linear-gradient(160deg,#0D0D1A 0%,#1A0A2E 40%,#0A1525 100%);
+  display:flex;flex-direction:column;padding:14px;}
+.phone-notch{width:76px;height:24px;background:#000;border-radius:12px;margin:0 auto 10px;}
+.phone-status{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.ps-left{font-size:7px;font-weight:700;color:#fff;letter-spacing:1px;}
+.ps-right{font-size:7px;color:rgba(255,255,255,.6);}
+.phone-logo{text-align:center;margin-bottom:12px;}
+.phone-logo-txt{font-size:10px;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.phone-banner{border-radius:10px;overflow:hidden;margin-bottom:10px;
+  background:linear-gradient(135deg,#1a0a35,#2d1250);
+  padding:12px;position:relative;}
+.pb-badge{display:inline-block;background:var(--pink);color:#fff;
+  font-size:6px;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:6px;}
+.pb-title{font-size:9px;font-weight:700;color:#fff;margin-bottom:3px;}
+.pb-sub{font-size:7px;color:rgba(255,255,255,.5);}
+.pb-stars{font-size:7px;color:var(--gold);margin-top:4px;}
+.phone-row{display:flex;gap:6px;margin-bottom:8px;}
+.ph-label{font-size:7px;font-weight:700;color:#fff;margin-bottom:5px;}
+.ph-card{flex:1;border-radius:8px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);padding:7px;text-align:center;}
+.ph-card-img{width:100%;aspect-ratio:2/3;border-radius:5px;margin-bottom:4px;object-fit:cover;}
+.ph-card-title{font-size:6px;color:rgba(255,255,255,.8);font-weight:600;}
+.phone-nav{display:flex;justify-content:space-around;margin-top:auto;
+  padding-top:8px;border-top:1px solid rgba(42,42,64,.6);}
+.pn-item{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.pn-icon{font-size:10px;}
+.pn-label{font-size:5.5px;color:rgba(255,255,255,.4);}
+.pn-label.act{color:var(--pink);}
+.pn-icon.act{filter:drop-shadow(0 0 4px var(--pink));}
+.phone-notch-bar{width:76px;height:24px;background:#000;border-radius:12px;margin:0 auto 8px;}
+
+/* floating pills */
+.fpill{position:absolute;z-index:5;
+  background:rgba(17,17,32,.88);backdrop-filter:blur(18px);
+  border:1px solid var(--div);border-radius:14px;padding:9px 13px;white-space:nowrap;}
+.fpill.p1{top:16px;left:-88px;animation:fp 3s ease-in-out infinite;}
+.fpill.p2{bottom:70px;right:-82px;animation:fp 3s ease-in-out infinite;animation-delay:-1.5s;}
+.fpill.p3{bottom:170px;left:-75px;animation:fp 3s ease-in-out infinite;animation-delay:-.8s;}
+@keyframes fp{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+.fp-lbl{font-size:.64rem;color:var(--muted);margin-bottom:2px;}
+.fp-val{font-size:.86rem;font-weight:700;}
+.fp-pk{color:var(--pink);}
+.fp-gd{color:var(--gold);}
+.fp-pp{color:#A78BFA;}
+
+/* TICKER */
+.ticker{position:relative;z-index:1;overflow:hidden;
+  border-top:1px solid var(--div);border-bottom:1px solid var(--div);
+  background:var(--surf);padding:13px 0;}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
+.ticker::before{left:0;background:linear-gradient(90deg,var(--surf),transparent);}
+.ticker::after{right:0;background:linear-gradient(-90deg,var(--surf),transparent);}
+.ticker-track{display:flex;gap:52px;animation:tick 28s linear infinite;}
 @keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-.tick-item{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);flex-shrink:0;}
-.tick-item em{font-style:normal;color:var(--text);}
+.tick-item{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--muted);flex-shrink:0;}
+.tick-item em{font-style:normal;color:var(--white);}
+
+/* SECTION */
 section{position:relative;z-index:1;}
-.container{max-width:1200px;margin:0 auto;padding:100px 5%;}
-.sec-tag{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px;}
-.sec-title{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:900;line-height:1.2;margin-bottom:14px;}
-.sec-sub{color:var(--muted);font-size:1rem;line-height:1.85;max-width:520px;}
-.stats-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;padding:50px 8%;}
-.stat-item{padding:20px;border-left:1px solid var(--border);}
-.stat-item:last-child{border-left:none;}
-.stat-big{font-size:2.6rem;font-weight:900;background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.stat-desc{color:var(--muted);font-size:.85rem;margin-top:6px;}
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:60px;}
-.bc{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:30px;transition:.4s;position:relative;overflow:hidden;cursor:default;}
-.bc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(139,92,246,.06),transparent);opacity:0;transition:.4s;}
+.container{max-width:1180px;margin:0 auto;padding:96px 5%;}
+.sec-tag{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;}
+.sec-title{font-size:clamp(1.85rem,3.2vw,2.65rem);font-weight:900;line-height:1.18;margin-bottom:12px;}
+.sec-sub{color:var(--grey);font-size:.97rem;line-height:1.85;max-width:500px;}
+
+/* STATS */
+.stats{background:var(--surf);border-top:1px solid var(--div);border-bottom:1px solid var(--div);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;padding:48px 8%;}
+.stat{padding:18px;border-left:1px solid var(--div);}
+.stat:last-child{border-left:none;}
+.stat-n{font-size:2.4rem;font-weight:900;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.stat-d{color:var(--muted);font-size:.82rem;margin-top:5px;}
+
+/* DRAMAS GRID */
+.dramas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px;}
+.drama-card{background:var(--card);border:1px solid var(--div);border-radius:18px;
+  overflow:hidden;transition:.35s;cursor:pointer;position:relative;}
+.drama-card:hover{transform:translateY(-6px);border-color:rgba(233,30,140,.28);
+  box-shadow:0 24px 60px rgba(0,0,0,.5);}
+.dc-img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+.dc-badge{position:absolute;top:10px;right:10px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#fff;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:6px;}
+.dc-badge.hot{background:linear-gradient(135deg,#FF4500,#E91E8C);}
+.dc-badge.new{background:linear-gradient(135deg,var(--green),#00E676);}
+.dc-badge.classic{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.dc-badge.excl{background:linear-gradient(135deg,var(--purple),#A855F7);}
+.dc-body{padding:14px;}
+.dc-genre{font-size:.68rem;color:var(--pink);font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:5px;}
+.dc-title{font-size:.92rem;font-weight:700;margin-bottom:7px;line-height:1.3;}
+.dc-meta{display:flex;align-items:center;gap:10px;font-size:.72rem;color:var(--muted);}
+.dc-star{color:var(--gold);}
+.dc-views{color:var(--muted);}
+
+/* BENTO FEATURES */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:52px;}
+.bc{background:var(--surf);border:1px solid var(--div);border-radius:22px;
+  padding:26px;transition:.38s;position:relative;overflow:hidden;cursor:default;}
+.bc::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(108,63,197,.07),transparent);
+  opacity:0;transition:.38s;}
 .bc:hover::before{opacity:1;}
-.bc:hover{border-color:rgba(139,92,246,.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);}
-.bc.c1{grid-column:span 3;grid-row:span 2;}
-.bc.c2{grid-column:span 3;}
-.bc.c3{grid-column:span 3;}
-.bc.c4{grid-column:span 2;}
-.bc.c5{grid-column:span 2;}
-.bc.c6{grid-column:span 2;}
-.bc-icon{font-size:2rem;margin-bottom:16px;display:block;}
-.bc-tag{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);margin-bottom:10px;}
-.bc h3{font-size:1.15rem;font-weight:700;margin-bottom:10px;}
-.bc p{color:var(--muted);font-size:.88rem;line-height:1.7;}
-.bc-big-num{font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
-.shots-section{background:linear-gradient(180deg,var(--bg),var(--surface),var(--bg));}
-.shots-scroll{display:flex;gap:18px;margin-top:56px;overflow-x:auto;padding:0 0 24px;scrollbar-width:none;cursor:grab;}
-.shots-scroll:active{cursor:grabbing;}
-.shots-scroll::-webkit-scrollbar{display:none;}
-.shot{flex:0 0 200px;border-radius:28px;overflow:hidden;border:1px solid var(--border);position:relative;transition:.4s;transform-origin:bottom center;}
-.shot:hover{transform:translateY(-16px) scale(1.04);border-color:rgba(255,45,120,.3);box-shadow:0 30px 60px rgba(0,0,0,.6),0 0 40px var(--glow-pink);}
-.shot img{width:100%;display:block;}
-.shot-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(5,4,8,.95),transparent);padding:30px 14px 14px;font-size:.78rem;font-weight:600;opacity:0;transition:.3s;}
-.shot:hover .shot-label{opacity:1;}
-.coins-section{background:var(--surface);}
-.coins-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:60px;}
-.coin-row{display:grid;grid-template-columns:1fr;gap:10px;}
-.c-item{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;background:var(--surface2);border:1px solid var(--border);transition:.3s;position:relative;overflow:hidden;}
-.c-item::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),transparent);transform:scaleY(0);transition:.3s;transform-origin:top;}
-.c-item:hover{border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.04);}
-.c-item:hover::after{transform:scaleY(1);}
-.c-emoji{font-size:1.5rem;flex-shrink:0;}
-.c-text h4{font-size:.9rem;font-weight:700;margin-bottom:2px;}
-.c-text p{font-size:.78rem;color:var(--muted);}
-.c-num{margin-right:auto;font-weight:900;font-size:1.05rem;color:var(--gold);}
-.coins-right{position:relative;}
-.coin-visual-card{background:linear-gradient(145deg,#1A1408,#0D0B00);border:1px solid rgba(245,158,11,.2);border-radius:28px;padding:36px;text-align:center;}
-.giant-coin{font-size:80px;display:block;animation:coin-anim 3s ease-in-out infinite;margin-bottom:16px;}
-@keyframes coin-anim{0%,100%{transform:scale(1) rotate(-5deg);}50%{transform:scale(1.1) rotate(5deg);}}
-.coin-total{font-size:3rem;font-weight:900;color:var(--gold);}
-.coin-total-label{color:var(--muted);font-size:.85rem;margin-top:4px;}
-.coin-bar{margin-top:24px;background:rgba(255,255,255,.06);border-radius:50px;height:8px;overflow:hidden;}
-.coin-fill{height:100%;width:70%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:50px;animation:fill-bar 2s ease-out forwards;}
-@keyframes fill-bar{from{width:0;}to{width:70%;}}
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px;align-items:start;}
-.plan{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:32px;transition:.4s;position:relative;}
-.plan:hover{transform:translateY(-6px);}
-.plan.hot{background:linear-gradient(160deg,#1C1200,#130F00,var(--surface));border-color:rgba(245,158,11,.3);box-shadow:0 0 60px rgba(245,158,11,.08);}
-.plan-ribbon{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;padding:4px 20px;border-radius:0 0 14px 14px;font-size:.72rem;font-weight:700;}
-.plan-head{text-align:center;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);}
-.plan-emoji{font-size:2.2rem;margin-bottom:10px;display:block;}
-.plan-name{font-size:1.1rem;font-weight:700;}
-.price-big{font-size:2.8rem;font-weight:900;margin:12px 0 4px;}
-.price-cur{font-size:1rem;font-weight:400;color:var(--muted);vertical-align:super;}
-.price-per{font-size:.8rem;color:var(--muted);}
-.plan-list{list-style:none;margin-bottom:28px;}
-.plan-list li{padding:9px 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--muted);display:flex;align-items:center;gap:8px;}
-.plan-list li::before{content:'';width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.6rem;}
-.plan-list li.gold-feat{color:var(--gold);}
-.plan-list li.gold-feat::before{background:linear-gradient(135deg,var(--gold),var(--gold2));}
-.plan-cta{width:100%;padding:14px;border-radius:14px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:'Cairo',sans-serif;transition:.3s;border:none;}
-.plan-cta.free-cta{background:var(--surface2);border:1px solid var(--border);color:var(--text);}
-.plan-cta.free-cta:hover{border-color:var(--purple);}
-.plan-cta.gold-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
-.plan-cta.gold-cta:hover{box-shadow:0 8px 30px rgba(245,158,11,.4);transform:translateY(-2px);}
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px;}
-.rv{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:28px;transition:.3s;}
-.rv:hover{border-color:rgba(139,92,246,.25);transform:translateY(-4px);}
-.rv-stars{margin-bottom:12px;font-size:1rem;color:var(--gold);}
-.rv-text{color:var(--muted);font-size:.88rem;line-height:1.75;margin-bottom:20px;}
-.rv-author{display:flex;align-items:center;gap:12px;}
-.rv-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex-shrink:0;}
-.rv-name{font-weight:700;font-size:.9rem;}
-.rv-role{color:var(--muted);font-size:.75rem;}
-.final{text-align:center;padding:140px 5%;position:relative;overflow:hidden;}
-.final-orb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:700px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(139,92,246,.15),transparent 65%);pointer-events:none;}
-.final h2{font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:900;margin-bottom:20px;line-height:1.15;position:relative;z-index:1;}
-.final p{color:var(--muted);font-size:1.05rem;margin-bottom:44px;position:relative;z-index:1;}
-.final-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
-footer{border-top:1px solid var(--border);background:var(--surface);padding:48px 8%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;}
-.footer-logo{font-size:1.3rem;font-weight:900;}
-.footer-center{display:flex;gap:28px;}
-.footer-center a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:.3s;}
-.footer-center a:hover{color:var(--text);}
-.footer-right{text-align:left;color:var(--muted);font-size:.8rem;}
-[data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;}
-[data-reveal].visible{opacity:1;transform:none;}
+.bc:hover{border-color:rgba(108,63,197,.28);transform:translateY(-4px);
+  box-shadow:0 22px 55px rgba(0,0,0,.45);}
+.bc.w3{grid-column:span 3;grid-row:span 2;}
+.bc.w2{grid-column:span 2;}
+.bc.w1{grid-column:span 2;}
+.bc-icon{font-size:1.85rem;margin-bottom:14px;display:block;}
+.bc-tag{font-size:.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--pink);margin-bottom:8px;}
+.bc h3{font-size:1.08rem;font-weight:700;margin-bottom:8px;}
+.bc p{color:var(--muted);font-size:.84rem;line-height:1.68;}
+.bc-big{font-size:3.2rem;font-weight:900;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:14px 0 4px;}
+
+/* COINS */
+.coins-sec{background:var(--surf);}
+.coins-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;margin-top:54px;}
+.c-list{display:grid;gap:9px;}
+.c-row{display:flex;align-items:center;gap:13px;padding:14px 16px;
+  border-radius:15px;background:var(--card);border:1px solid var(--div);
+  transition:.3s;position:relative;overflow:hidden;}
+.c-row::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--gold),transparent);
+  transform:scaleY(0);transition:.3s;transform-origin:top;}
+.c-row:hover{border-color:rgba(201,168,76,.28);background:rgba(201,168,76,.04);}
+.c-row:hover::after{transform:scaleY(1);}
+.c-emoji{font-size:1.4rem;flex-shrink:0;}
+.c-info h4{font-size:.87rem;font-weight:700;margin-bottom:1px;}
+.c-info p{font-size:.74rem;color:var(--muted);}
+.c-amt{margin-right:auto;font-weight:900;font-size:1rem;color:var(--gold);}
+.coin-card{background:linear-gradient(145deg,#1A1408,#0D0B00);
+  border:1px solid rgba(201,168,76,.2);border-radius:26px;padding:34px;text-align:center;}
+.coin-big{font-size:76px;display:block;animation:cspin 3.5s ease-in-out infinite;margin-bottom:14px;}
+@keyframes cspin{0%,100%{transform:scale(1) rotate(-4deg);}50%{transform:scale(1.1) rotate(4deg);}}
+.coin-total{font-size:2.6rem;font-weight:900;color:var(--gold);}
+.coin-sub{color:var(--muted);font-size:.82rem;margin-top:4px;}
+.coin-bar{margin-top:22px;background:rgba(255,255,255,.06);border-radius:50px;height:7px;overflow:hidden;}
+.coin-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:50px;transition:width 1.5s ease-out;}
+
+/* PLANS */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px;align-items:start;}
+.plan{background:var(--surf);border:1px solid var(--div);border-radius:26px;padding:30px;
+  transition:.38s;position:relative;}
+.plan:hover{transform:translateY(-5px);}
+.plan.hot{background:linear-gradient(155deg,#1C1200,#120F00,var(--surf));
+  border-color:rgba(201,168,76,.32);box-shadow:0 0 60px rgba(201,168,76,.07);}
+.plan-ribbon{position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;
+  padding:4px 20px;border-radius:0 0 13px 13px;font-size:.68rem;font-weight:700;}
+.plan-head{text-align:center;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--div);}
+.plan-emoji{font-size:2rem;margin-bottom:9px;display:block;}
+.plan-name{font-size:1rem;font-weight:700;}
+.plan-price{font-size:2.5rem;font-weight:900;margin:10px 0 3px;}
+.plan-cur{font-size:.9rem;color:var(--muted);vertical-align:super;}
+.plan-per{font-size:.76rem;color:var(--muted);}
+.plan-feats{list-style:none;margin-bottom:24px;}
+.plan-feats li{padding:8px 0;border-bottom:1px solid var(--div);font-size:.84rem;color:var(--grey);
+  display:flex;align-items:center;gap:8px;}
+.plan-feats li::before{content:'';width:15px;height:15px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--pink),var(--purple));}
+.plan-feats li.gf{color:var(--gold);}
+.plan-feats li.gf::before{background:linear-gradient(135deg,var(--gold),var(--gold2));}
+.plan-btn{width:100%;padding:13px;border-radius:13px;font-weight:700;font-size:.92rem;
+  cursor:pointer;font-family:'Cairo',sans-serif;transition:.3s;border:none;}
+.plan-btn.free{background:var(--card);border:1px solid var(--div);color:#fff;}
+.plan-btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.plan-btn.gold:hover{box-shadow:0 8px 32px rgba(201,168,76,.4);transform:translateY(-2px);}
+
+/* REVIEWS */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px;}
+.rv{background:var(--surf);border:1px solid var(--div);border-radius:22px;padding:26px;transition:.3s;}
+.rv:hover{border-color:rgba(108,63,197,.28);transform:translateY(-4px);}
+.rv-stars{font-size:.95rem;color:var(--gold);margin-bottom:10px;}
+.rv-txt{color:var(--muted);font-size:.84rem;line-height:1.75;margin-bottom:18px;}
+.rv-auth{display:flex;align-items:center;gap:11px;}
+.rv-av{width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;flex-shrink:0;}
+.rv-name{font-weight:700;font-size:.87rem;}
+.rv-role{color:var(--muted);font-size:.72rem;}
+
+/* FINAL CTA */
+.final-sec{text-align:center;padding:130px 5%;position:relative;overflow:hidden;}
+.final-orb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:650px;height:380px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(108,63,197,.14),transparent 65%);pointer-events:none;}
+.final-sec h2{font-size:clamp(2rem,4vw,3.4rem);font-weight:900;margin-bottom:18px;
+  line-height:1.12;position:relative;z-index:1;}
+.final-sec p{color:var(--grey);font-size:1rem;margin-bottom:40px;position:relative;z-index:1;}
+.final-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--div);background:var(--surf);
+  padding:42px 8%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;}
+.fl{font-size:1.25rem;font-weight:900;}
+.fc{display:flex;gap:26px;}
+.fc a{color:var(--muted);text-decoration:none;font-size:.82rem;transition:.25s;}
+.fc a:hover{color:#fff;}
+.fr{text-align:left;color:var(--muted);font-size:.76rem;}
+
+/* REVEAL */
+[data-rv]{opacity:0;transform:translateY(26px);transition:opacity .58s ease,transform .58s ease;}
+[data-rv].vis{opacity:1;transform:none;}
+
+/* RESPONSIVE */
 @media(max-width:960px){
-  .hero{grid-template-columns:1fr;text-align:center;padding-top:100px;}
-  .hero-sub{margin:0 auto 36px;}
-  .hero-actions{justify-content:center;}
-  .hero-pills{justify-content:center;}
-  .hero-visual{display:none;}
-  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:90px;}
+  .hero-sub{margin:0 auto 34px;}
+  .hero-btns{justify-content:center;}
+  .hero-tags{justify-content:center;}
+  .hero-right{display:none;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .dramas-grid{grid-template-columns:repeat(2,1fr);}
   .bento{grid-template-columns:1fr;}
-  .bc.c1,.bc.c2,.bc.c3,.bc.c4,.bc.c5,.bc.c6{grid-column:span 1;grid-row:span 1;}
+  .bc.w3,.bc.w2,.bc.w1{grid-column:span 1;grid-row:span 1;}
   .coins-grid{grid-template-columns:1fr;}
-  .plans{grid-template-columns:1fr;}
-  .reviews{grid-template-columns:1fr;}
-  .nav-center{display:none;}
+  .plans-grid{grid-template-columns:1fr;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
   footer{grid-template-columns:1fr;text-align:center;}
-  .footer-center{justify-content:center;}
-  .footer-right{text-align:center;}
+  .fc{justify-content:center;}
+  .fr{text-align:center;}
 }
 </style>
 </head>
 <body>
 <div class="orbs"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
-<nav>
-  <div class="logo"><div class="logo-icon">🎬</div><span class="logo-text">Iska Drama</span></div>
-  <ul class="nav-center">
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-icon">🎬</div>
+    <span class="logo-name">ISKA DRAMA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#dramas">المسلسلات</a></li>
     <li><a href="#features">المزايا</a></li>
-    <li><a href="#screenshots">لقطات</a></li>
     <li><a href="#coins">المكافآت</a></li>
     <li><a href="#membership">العضوية</a></li>
   </ul>
-  <div class="nav-right"><button class="btn-nav-dl" onclick="document.getElementById('dl').scrollIntoView({behavior:'smooth'})">⬇ حمّل مجاناً</button></div>
+  <button class="nav-cta" onclick="document.getElementById('dl').scrollIntoView({behavior:'smooth'})">⬇ حمّل مجاناً</button>
 </nav>
+
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">التطبيق المفضل لعشاق الدراما</span></div>
-    <h1>شاهد، اكسب،<br/><span class="grad-text">واستمتع أكثر</span></h1>
+  <div>
+    <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-txt">التطبيق المفضل لعشاق الدراما</span></div>
+    <h1>شاهد، اكسب،<br/><span class="grad">واستمتع أكثر</span></h1>
     <p class="hero-sub">آلاف الحلقات من الدراما الكورية والتركية والعربية، مع نظام مكافآت يومي يفتح لك المزيد — مجاناً.</p>
-    <div class="hero-actions">
-      <a href="#" class="btn-hero-primary" id="dl">⬇ حمّل التطبيق مجاناً</a>
-      <a href="#screenshots" class="btn-hero-ghost">▶ شاهد العرض</a>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary" id="dl">⬇ حمّل التطبيق مجاناً</a>
+      <a href="#dramas" class="btn-ghost">▶ تصفح المسلسلات</a>
     </div>
-    <div class="hero-pills">
-      <div class="pill"><span class="pill-dot" style="background:var(--pink)"></span>دراما كورية</div>
-      <div class="pill"><span class="pill-dot" style="background:var(--purple)"></span>دراما تركية</div>
-      <div class="pill"><span class="pill-dot" style="background:var(--gold)"></span>عضوية ذهبية</div>
-      <div class="pill"><span class="pill-dot" style="background:#60A5FA"></span>مكافآت يومية</div>
+    <div class="hero-tags">
+      <div class="htag"><span class="htag-dot" style="background:var(--pink)"></span>رومانسي</div>
+      <div class="htag"><span class="htag-dot" style="background:var(--purple)"></span>انتقام</div>
+      <div class="htag"><span class="htag-dot" style="background:var(--gold)"></span>تاريخي</div>
+      <div class="htag"><span class="htag-dot" style="background:#60A5FA"></span>خيال</div>
+      <div class="htag"><span class="htag-dot" style="background:var(--green)"></span>إثارة</div>
     </div>
   </div>
-  <div class="hero-visual">
-    <div class="phone-scene">
-      <div class="phone-glow-bg"></div>
-      <div class="phone-outer"><div class="phone-inner"><div class="phone-notch"></div><img src="assets/1000003835.jpg" alt="Iska Drama"/></div></div>
-      <div class="f-pill p1"><div class="fp-label">مكافأة اليوم 🎁</div><div class="fp-val fp-gold">🪙 13,200</div></div>
-      <div class="f-pill p2"><div class="fp-label">عضويتك الآن</div><div class="fp-val fp-purple">👑 ذهبي</div></div>
-      <div class="f-pill p3"><div class="fp-label">حلقة جديدة!</div><div class="fp-val fp-pink">🔴 مباشر</div></div>
+  <div class="hero-right">
+    <div class="phone-wrap">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <div class="phone-inner">
+          <div class="phone-screen">
+            <div class="phone-notch-bar"></div>
+            <div class="phone-status">
+              <span class="ps-left">ISKA DRAMA</span>
+              <span class="ps-right">🔋 98%</span>
+            </div>
+            <div class="phone-banner">
+              <div class="pb-badge">TRENDING</div>
+              <div class="pb-title">قلب من حجر</div>
+              <div class="pb-sub">رومانسي · 80 حلقة</div>
+              <div class="pb-stars">★★★★★ 4.8</div>
+            </div>
+            <div class="ph-label">الأكثر مشاهدة</div>
+            <div class="phone-row">
+              <div class="ph-card">
+                <img class="ph-card-img" src="https://picsum.photos/seed/d2/80/120" alt="انتقام الملكة"/>
+                <div class="ph-card-title">انتقام الملكة</div>
+              </div>
+              <div class="ph-card">
+                <img class="ph-card-img" src="https://picsum.photos/seed/d7/80/120" alt="طبيب القلوب"/>
+                <div class="ph-card-title">طبيب القلوب</div>
+              </div>
+              <div class="ph-card">
+                <img class="ph-card-img" src="https://picsum.photos/seed/d5/80/120" alt="حب في زمن الحرب"/>
+                <div class="ph-card-title">حب في الحرب</div>
+              </div>
+            </div>
+            <div class="phone-nav">
+              <div class="pn-item"><div class="pn-icon act">🏠</div><div class="pn-label act">الرئيسية</div></div>
+              <div class="pn-item"><div class="pn-icon">▶️</div><div class="pn-label">ريلز</div></div>
+              <div class="pn-item"><div class="pn-icon">👑</div><div class="pn-label">عضو</div></div>
+              <div class="pn-item"><div class="pn-icon">🎁</div><div class="pn-label">مكافآت</div></div>
+              <div class="pn-item"><div class="pn-icon">👤</div><div class="pn-label">حسابي</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fpill p1"><div class="fp-lbl">مكافأة اليوم 🎁</div><div class="fp-val fp-gd">🪙 700 عملة</div></div>
+      <div class="fpill p2"><div class="fp-lbl">عضويتك الآن</div><div class="fp-val fp-pp">👑 ذهبي</div></div>
+      <div class="fpill p3"><div class="fp-lbl">طبيب القلوب</div><div class="fp-val fp-pk">⭐ 4.8 · 11.2M</div></div>
     </div>
   </div>
 </div>
+
+<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <div class="tick-item">🎬 <em>دراما كورية</em></div><div class="tick-item">🌹 <em>رومانسي</em></div><div class="tick-item">⚔️ <em>تاريخي وملحمي</em></div><div class="tick-item">🔥 <em>أكشن وإثارة</em></div><div class="tick-item">💎 <em>عضوية ذهبية</em></div><div class="tick-item">🪙 <em>مكافآت يومية</em></div><div class="tick-item">🌙 <em>دراما تركية</em></div><div class="tick-item">🎭 <em>دراما عربية</em></div><div class="tick-item">📺 <em>HD بجودة</em></div>
-    <div class="tick-item">🎬 <em>دراما كورية</em></div><div class="tick-item">🌹 <em>رومانسي</em></div><div class="tick-item">⚔️ <em>تاريخي وملحمي</em></div><div class="tick-item">🔥 <em>أكشن وإثارة</em></div><div class="tick-item">💎 <em>عضوية ذهبية</em></div><div class="tick-item">🪙 <em>مكافآت يومية</em></div><div class="tick-item">🌙 <em>دراما تركية</em></div><div class="tick-item">🎭 <em>دراما عربية</em></div><div class="tick-item">📺 <em>HD بجودة</em></div>
+    <div class="tick-item">🎬 <em>قلب من حجر</em></div>
+    <div class="tick-item">👑 <em>انتقام الملكة</em></div>
+    <div class="tick-item">🌙 <em>أميرة الظل</em></div>
+    <div class="tick-item">⚔️ <em>خيانة في القصر</em></div>
+    <div class="tick-item">🌹 <em>حب في زمن الحرب</em></div>
+    <div class="tick-item">💎 <em>الوريث المجهول</em></div>
+    <div class="tick-item">❤️ <em>طبيب القلوب</em></div>
+    <div class="tick-item">🔥 <em>الجاسوسة الجميلة</em></div>
+    <div class="tick-item">🪙 <em>مكافآت يومية</em></div>
+    <div class="tick-item">🎬 <em>قلب من حجر</em></div>
+    <div class="tick-item">👑 <em>انتقام الملكة</em></div>
+    <div class="tick-item">🌙 <em>أميرة الظل</em></div>
+    <div class="tick-item">⚔️ <em>خيانة في القصر</em></div>
+    <div class="tick-item">🌹 <em>حب في زمن الحرب</em></div>
+    <div class="tick-item">💎 <em>الوريث المجهول</em></div>
+    <div class="tick-item">❤️ <em>طبيب القلوب</em></div>
+    <div class="tick-item">🔥 <em>الجاسوسة الجميلة</em></div>
+    <div class="tick-item">🪙 <em>مكافآت يومية</em></div>
   </div>
 </div>
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-item" data-reveal><div class="stat-big" data-count="50000">0</div><div class="stat-desc">مستخدم نشط</div></div>
-    <div class="stat-item" data-reveal><div class="stat-big" data-count="1200">0</div><div class="stat-desc">مسلسل متاح</div></div>
-    <div class="stat-item" data-reveal><div class="stat-big" data-count="4.8" data-dec="1">0</div><div class="stat-desc">تقييم متجر التطبيقات</div></div>
-    <div class="stat-item" data-reveal><div class="stat-big" data-count="98" data-suffix="%">0</div><div class="stat-desc">رضا المستخدمين</div></div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div class="stat" data-rv><div class="stat-n" data-count="50000">0</div><div class="stat-d">مستخدم نشط</div></div>
+    <div class="stat" data-rv><div class="stat-n" data-count="8000">0</div><div class="stat-d">حلقة في المكتبة</div></div>
+    <div class="stat" data-rv><div class="stat-n" data-count="4.8" data-dec="1">0</div><div class="stat-d">تقييم التطبيق</div></div>
+    <div class="stat" data-rv><div class="stat-n" data-count="8" data-suffix="+">0</div><div class="stat-d">مسلسلات حصرية</div></div>
   </div>
 </div>
-<section id="features"><div class="container">
-  <div class="sec-tag" data-reveal>المزايا الأساسية</div>
-  <h2 class="sec-title" data-reveal>كل شيء صُمِّم لتجربة مشاهدة لا مثيل لها</h2>
-  <div class="bento">
-    <div class="bc c1" data-reveal><span class="bc-icon">🎬</span><div class="bc-tag">المكتبة</div><h3>آلاف الحلقات في مكان واحد</h3><p>دراما كورية، تركية، عربية، وصينية مترجمة بجودة عالية. محتوى جديد يُضاف أسبوعياً.</p><div class="bc-big-num" style="margin-top:20px;">+1,200</div><p style="color:var(--muted);font-size:.8rem;">مسلسل جاهز للمشاهدة الآن</p></div>
-    <div class="bc c2" data-reveal><span class="bc-icon">🪙</span><div class="bc-tag">نظام العملات</div><h3>اكسب وشاهد مجاناً</h3><p>أدِّ مهام يومية بسيطة واكسب عملات تفتح بها حلقاتك بدون دفع.</p></div>
-    <div class="bc c3" data-reveal><span class="bc-icon">👑</span><div class="bc-tag">العضوية الذهبية</div><h3>وصول كامل وبلا حدود</h3><p>اشترك وشاهد كل شيء بدون إعلانات مع مضاعفة مكافآتك.</p></div>
-    <div class="bc c4" data-reveal><span class="bc-icon">📅</span><h3>تسجيل يومي</h3><p>ادخل كل يوم وحصّل مكافآت تراكمية.</p></div>
-    <div class="bc c5" data-reveal><span class="bc-icon">📋</span><h3>قائمة المشاهدة</h3><p>احفظ ما تريد وتابع مستواك.</p></div>
-    <div class="bc c6" data-reveal><span class="bc-icon">🔔</span><h3>إشعارات فورية</h3><p>كن أول من يعرف بكل حلقة جديدة.</p></div>
-  </div>
-</div></section>
-<section class="shots-section" id="screenshots"><div class="container">
-  <div class="sec-tag" data-reveal>من داخل التطبيق</div>
-  <h2 class="sec-title" data-reveal>صُمِّم ليُبهرك في كل شاشة</h2>
-  <p class="sec-sub" data-reveal>واجهة سينمائية داكنة صُمِّمت لتجعل تجربة المشاهدة أكثر انغماساً</p>
-  <div class="shots-scroll">
-    <div class="shot"><img src="assets/1000003835.jpg" alt="الرئيسية"/><div class="shot-label">الصفحة الرئيسية</div></div>
-    <div class="shot"><img src="assets/1000003837.jpg" alt="التفاصيل"/><div class="shot-label">تفاصيل المسلسل</div></div>
-    <div class="shot"><img src="assets/1000003862.jpg" alt="المشغّل"/><div class="shot-label">مشغّل الحلقات</div></div>
-    <div class="shot"><img src="assets/1000003863.jpg" alt="المكافآت"/><div class="shot-label">نظام المكافآت</div></div>
-    <div class="shot"><img src="assets/1000003866.jpg" alt="العضوية"/><div class="shot-label">العضوية الذهبية</div></div>
-  </div>
-</div></section>
-<section class="coins-section" id="coins"><div class="container">
-  <div class="sec-tag" data-reveal>اكسب كل يوم</div>
-  <h2 class="sec-title" data-reveal>نظام مكافآت يُحفّزك على العودة</h2>
-  <p class="sec-sub" data-reveal>كلما فتحت التطبيق، كسبت أكثر</p>
-  <div class="coins-grid">
-    <div class="coin-row">
-      <div class="c-item" data-reveal><span class="c-emoji">📅</span><div class="c-text"><h4>تسجيل الدخول اليومي</h4><p>يزيد مع كل يوم متتالي</p></div><div class="c-num">+13,200</div></div>
-      <div class="c-item" data-reveal><span class="c-emoji">📺</span><div class="c-text"><h4>مشاهدة يومية</h4><p>شاهد 30 دقيقة وكسب مكافأتك</p></div><div class="c-num">+8,800</div></div>
-      <div class="c-item" data-reveal><span class="c-emoji">🔗</span><div class="c-text"><h4>دعوة صديق</h4><p>لكل صديق تدعوه ويسجّل</p></div><div class="c-num">+22,000</div></div>
-      <div class="c-item" data-reveal><span class="c-emoji">📰</span><div class="c-text"><h4>تصفح الاستكشاف</h4><p>تصفح 5 صفحات جديدة</p></div><div class="c-num">+480</div></div>
-      <div class="c-item" data-reveal><span class="c-emoji">🔔</span><div class="c-text"><h4>تفعيل الإشعارات</h4><p>مرة واحدة فقط</p></div><div class="c-num">+4,400</div></div>
-      <div class="c-item" data-reveal><span class="c-emoji">🆕</span><div class="c-text"><h4>مكافأة المستخدم الجديد</h4><p>مضاعفة لأول 7 أيام</p></div><div class="c-num">×2</div></div>
+
+<!-- DRAMAS -->
+<section id="dramas"><div class="container">
+  <div class="sec-tag" data-rv>مكتبة المسلسلات</div>
+  <h2 class="sec-title" data-rv>أشهر المسلسلات على التطبيق</h2>
+  <p class="sec-sub" data-rv>من الرومانسي إلى الإثارة — اختر ما يناسبك وابدأ المشاهدة الآن</p>
+  <div class="dramas-grid">
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d1/400/600" alt="قلب من حجر" loading="lazy" width="400" height="600"/>
+      <div class="dc-badge">TRENDING</div>
+      <div class="dc-body">
+        <div class="dc-genre">رومانسي</div>
+        <div class="dc-title">قلب من حجر</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.8</span><span class="dc-views">12.4M مشاهدة</span><span>80 حلقة</span></div>
+      </div>
     </div>
-    <div class="coins-right" data-reveal>
-      <div class="coin-visual-card">
-        <span class="giant-coin">🪙</span>
-        <div class="coin-total">26,400</div>
-        <div class="coin-total-label">أقصى مكافأة يومية ممكنة</div>
-        <div class="coin-bar"><div class="coin-fill"></div></div>
-        <p style="color:var(--muted);font-size:.78rem;margin-top:12px;">كل 1,000 عملة = فتح حلقة جديدة كاملة</p>
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d2/400/600" alt="انتقام الملكة" loading="lazy" width="400" height="600"/>
+      <div class="dc-badge hot">HOT</div>
+      <div class="dc-body">
+        <div class="dc-genre">انتقام</div>
+        <div class="dc-title">انتقام الملكة</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.7</span><span class="dc-views">9.8M مشاهدة</span><span>60 حلقة</span></div>
+      </div>
+    </div>
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d7/400/600" alt="طبيب القلوب" loading="lazy" width="400" height="600"/>
+      <div class="dc-body">
+        <div class="dc-genre">رومانسي</div>
+        <div class="dc-title">طبيب القلوب</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.8</span><span class="dc-views">11.2M مشاهدة</span><span>70 حلقة</span></div>
+      </div>
+    </div>
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d5/400/600" alt="حب في زمن الحرب" loading="lazy" width="400" height="600"/>
+      <div class="dc-badge classic">CLASSIC</div>
+      <div class="dc-body">
+        <div class="dc-genre">تاريخي رومانسي</div>
+        <div class="dc-title">حب في زمن الحرب</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.9</span><span class="dc-views">8.1M مشاهدة</span><span>100 حلقة</span></div>
+      </div>
+    </div>
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d3/400/600" alt="أميرة الظل" loading="lazy" width="400" height="600"/>
+      <div class="dc-badge new">NEW</div>
+      <div class="dc-body">
+        <div class="dc-genre">خيال</div>
+        <div class="dc-title">أميرة الظل</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.6</span><span class="dc-views">7.2M مشاهدة</span><span>50 حلقة</span></div>
+      </div>
+    </div>
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d8/400/600" alt="الجاسوسة الجميلة" loading="lazy" width="400" height="600"/>
+      <div class="dc-badge hot">HOT</div>
+      <div class="dc-body">
+        <div class="dc-genre">إثارة</div>
+        <div class="dc-title">الجاسوسة الجميلة</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.3</span><span class="dc-views">4.9M مشاهدة</span><span>40 حلقة</span></div>
+      </div>
+    </div>
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d4/400/600" alt="خيانة في القصر" loading="lazy" width="400" height="600"/>
+      <div class="dc-body">
+        <div class="dc-genre">خيانة</div>
+        <div class="dc-title">خيانة في القصر</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.5</span><span class="dc-views">5.5M مشاهدة</span><span>45 حلقة</span></div>
+      </div>
+    </div>
+    <div class="drama-card" data-rv>
+      <img class="dc-img" src="https://picsum.photos/seed/d6/400/600" alt="الوريث المجهول" loading="lazy" width="400" height="600"/>
+      <div class="dc-badge excl">EXCL</div>
+      <div class="dc-body">
+        <div class="dc-genre">دراما</div>
+        <div class="dc-title">الوريث المجهول</div>
+        <div class="dc-meta"><span class="dc-star">★ 4.4</span><span class="dc-views">6.3M مشاهدة</span><span>55 حلقة</span></div>
       </div>
     </div>
   </div>
 </div></section>
-<section id="membership"><div class="container">
-  <div style="text-align:center;">
-    <div class="sec-tag" data-reveal>خطط الاشتراك</div>
-    <h2 class="sec-title" data-reveal>اختر تجربتك</h2>
-  </div>
-  <div class="plans">
-    <div class="plan" data-reveal>
-      <div class="plan-head"><span class="plan-emoji">🆓</span><div class="plan-name">مجاني</div><div class="price-big">0<span class="price-per"> / للأبد</span></div></div>
-      <ul class="plan-list"><li>مشاهدة بالعملات المكتسبة</li><li>مكافآت يومية كاملة</li><li>آلاف الحلقات المتاحة</li><li>إعلانات محدودة</li></ul>
-      <button class="plan-cta free-cta">ابدأ مجاناً الآن</button>
+
+<!-- FEATURES BENTO -->
+<section id="features" style="background:var(--surf);"><div class="container">
+  <div class="sec-tag" data-rv>مزايا التطبيق</div>
+  <h2 class="sec-title" data-rv>كل ما تحتاجه في مكان واحد</h2>
+  <div class="bento">
+    <div class="bc w3" data-rv>
+      <span class="bc-icon">🎬</span>
+      <div class="bc-tag">المكتبة</div>
+      <h3>مكتبة ضخمة تضم أكثر من 8000 حلقة</h3>
+      <p>دراما كورية، تركية، عربية، وصينية مترجمة بجودة HD. حلقات جديدة تضاف يومياً.</p>
+      <div class="bc-big">+8,000</div>
+      <p style="color:var(--muted);font-size:.78rem;">حلقة جاهزة للمشاهدة الآن</p>
     </div>
-    <div class="plan hot" data-reveal>
+    <div class="bc w2" data-rv>
+      <span class="bc-icon">🪙</span>
+      <div class="bc-tag">العملات</div>
+      <h3>اكسب واستخدم مجاناً</h3>
+      <p>10 عملات فقط لفتح أي حلقة — اكسبها يومياً بدون دفع.</p>
+    </div>
+    <div class="bc w1" data-rv>
+      <span class="bc-icon">👑</span>
+      <div class="bc-tag">العضوية الذهبية</div>
+      <h3>وصول كامل بلا حدود</h3>
+      <p>شاهد بدون إعلانات مع مضاعفة مكافآتك اليومية.</p>
+    </div>
+    <div class="bc w2" data-rv>
+      <span class="bc-icon">📅</span>
+      <h3>تسجيل يومي</h3>
+      <p>سجّل كل يوم واحصل على مكافآت تصل إلى 700 عملة يومياً.</p>
+    </div>
+    <div class="bc w2" data-rv>
+      <span class="bc-icon">📺</span>
+      <h3>جودة HD</h3>
+      <p>مشاهدة بجودة عالية مع ترجمة بـ 4 لغات: عربي، إنجليزي، فرنسي، تركي.</p>
+    </div>
+    <div class="bc w2" data-rv>
+      <span class="bc-icon">🔔</span>
+      <h3>إشعارات فورية</h3>
+      <p>كن أول من يعرف بكل حلقة جديدة من مسلسلاتك المفضلة.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- COINS -->
+<section class="coins-sec" id="coins"><div class="container">
+  <div class="sec-tag" data-rv>نظام المكافآت</div>
+  <h2 class="sec-title" data-rv>اكسب عملات كل يوم</h2>
+  <p class="sec-sub" data-rv>استخدم عملاتك لفتح الحلقات والمحتوى الحصري</p>
+  <div class="coins-grid">
+    <div class="c-list">
+      <div class="c-row" data-rv><span class="c-emoji">📅</span><div class="c-info"><h4>تسجيل الحضور اليومي</h4><p>يزيد مع كل يوم متتالي — حتى 700 عملة!</p></div><div class="c-amt">+700</div></div>
+      <div class="c-row" data-rv><span class="c-emoji">📺</span><div class="c-info"><h4>مشاهدة إعلان</h4><p>شاهد إعلاناً قصيراً واكسب عملات</p></div><div class="c-amt">+10</div></div>
+      <div class="c-row" data-rv><span class="c-emoji">🆕</span><div class="c-info"><h4>مكافأة المستخدم الجديد</h4><p>50 عملة هدية ترحيبية عند التسجيل</p></div><div class="c-amt">+50</div></div>
+      <div class="c-row" data-rv><span class="c-emoji">👑</span><div class="c-info"><h4>العضوية الذهبية الأسبوعية</h4><p>100 عملة هدية فور الاشتراك</p></div><div class="c-amt">+100</div></div>
+      <div class="c-row" data-rv><span class="c-emoji">💎</span><div class="c-info"><h4>العضوية الذهبية السنوية</h4><p>500 عملة هدية فور الاشتراك</p></div><div class="c-amt">+500</div></div>
+      <div class="c-row" data-rv><span class="c-emoji">🔓</span><div class="c-info"><h4>فتح حلقة</h4><p>استخدم 10 عملات فقط لفتح أي حلقة</p></div><div class="c-amt">-10</div></div>
+    </div>
+    <div data-rv>
+      <div class="coin-card">
+        <span class="coin-big">🪙</span>
+        <div class="coin-total" data-count="700">0</div>
+        <div class="coin-sub">أقصى مكافأة يومية ممكنة</div>
+        <div class="coin-bar"><div class="coin-fill" id="coinFill"></div></div>
+        <p style="color:var(--muted);font-size:.75rem;margin-top:10px;">كل 10 عملات = فتح حلقة كاملة</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- MEMBERSHIP -->
+<section id="membership" style="background:var(--surf);"><div class="container">
+  <div style="text-align:center;">
+    <div class="sec-tag" data-rv>خطط الاشتراك</div>
+    <h2 class="sec-title" data-rv>اختر عضويتك</h2>
+  </div>
+  <div class="plans-grid">
+    <div class="plan" data-rv>
+      <div class="plan-head"><span class="plan-emoji">🆓</span><div class="plan-name">مجاني</div><div class="plan-price">0<span class="plan-per"> / للأبد</span></div></div>
+      <ul class="plan-feats">
+        <li>مشاهدة بالعملات المكتسبة</li>
+        <li>مكافآت يومية كاملة</li>
+        <li>تصفح كامل للمكتبة</li>
+        <li>إعلانات محدودة</li>
+      </ul>
+      <button class="plan-btn free">ابدأ مجاناً</button>
+    </div>
+    <div class="plan hot" data-rv>
       <div class="plan-ribbon">الأكثر شعبية</div>
-      <div class="plan-head"><span class="plan-emoji">👑</span><div class="plan-name">ذهبي شهري</div><div class="price-big"><span class="price-cur">$</span>2.99<span class="price-per"> / شهر</span></div></div>
-      <ul class="plan-list"><li class="gold-feat">وصول كامل غير محدود</li><li class="gold-feat">بدون أي إعلانات</li><li class="gold-feat">مكافآت مضاعفة ×2</li><li class="gold-feat">شارة ذهبية حصرية</li><li>أولوية في المحتوى الجديد</li></ul>
-      <button class="plan-cta gold-cta">اشترك الآن</button>
+      <div class="plan-head"><span class="plan-emoji">👑</span><div class="plan-name">ذهبي أسبوعي</div><div class="plan-price"><span class="plan-cur">$</span>2.99<span class="plan-per"> / أسبوع</span></div></div>
+      <ul class="plan-feats">
+        <li class="gf">مشاهدة غير محدودة بدون إعلانات</li>
+        <li class="gf">جودة عالية HD</li>
+        <li class="gf">+100 عملة هدية ترحيبية</li>
+        <li class="gf">مكافآت يومية مضاعفة</li>
+        <li>حلقات ومحتوى حصري</li>
+      </ul>
+      <button class="plan-btn gold">اشترك الآن</button>
     </div>
-    <div class="plan" data-reveal>
-      <div class="plan-head"><span class="plan-emoji">💎</span><div class="plan-name">ذهبي سنوي</div><div class="price-big"><span class="price-cur">$</span>19.99<span class="price-per"> / سنة</span></div></div>
-      <ul class="plan-list"><li class="gold-feat">كل مزايا الذهبي الشهري</li><li class="gold-feat">وفّر أكثر من 50%</li><li class="gold-feat">مكافآت مضاعفة ×3</li><li>دعم أولوية مخصص</li></ul>
-      <button class="plan-cta gold-cta">أفضل قيمة</button>
+    <div class="plan" data-rv>
+      <div class="plan-head"><span class="plan-emoji">💎</span><div class="plan-name">ذهبي سنوي</div><div class="plan-price"><span class="plan-cur">$</span>19.99<span class="plan-per"> / سنة</span></div></div>
+      <ul class="plan-feats">
+        <li class="gf">كل مزايا الذهبي الأسبوعي</li>
+        <li class="gf">+500 عملة هدية ترحيبية</li>
+        <li class="gf">وفّر 83% مقارنة بالأسبوعي</li>
+        <li>تحميل الحلقات بدون إنترنت</li>
+      </ul>
+      <button class="plan-btn gold">أفضل قيمة</button>
     </div>
   </div>
+  <p style="text-align:center;color:var(--muted);font-size:.78rem;margin-top:20px;">تتجدد العضوية تلقائياً ويمكنك إلغاؤها في أي وقت</p>
 </div></section>
-<section style="background:var(--surface);"><div class="container">
+
+<!-- REVIEWS -->
+<section><div class="container">
   <div style="text-align:center;">
-    <div class="sec-tag" data-reveal>آراء المستخدمين</div>
-    <h2 class="sec-title" data-reveal>50,000+ شخص يثقون بنا</h2>
+    <div class="sec-tag" data-rv>آراء المستخدمين</div>
+    <h2 class="sec-title" data-rv>50,000+ شخص يثقون بـ Iska Drama</h2>
   </div>
-  <div class="reviews">
-    <div class="rv" data-reveal><div class="rv-stars">★★★★★</div><p class="rv-text">"أفضل تطبيق دراما جربته! نظام العملات رائع، أصبح عندي دافع أفتح التطبيق كل يوم."</p><div class="rv-author"><div class="rv-av">س</div><div><div class="rv-name">سارة م.</div><div class="rv-role">مستخدمة منذ 6 أشهر</div></div></div></div>
-    <div class="rv" data-reveal><div class="rv-stars">★★★★★</div><p class="rv-text">"التطبيق سهل جداً والترجمة ممتازة. اشتركت بالعضوية الذهبية وما ندمت لحظة."</p><div class="rv-author"><div class="rv-av">أ</div><div><div class="rv-name">أحمد ك.</div><div class="rv-role">عضو ذهبي</div></div></div></div>
-    <div class="rv" data-reveal><div class="rv-stars">★★★★☆</div><p class="rv-text">"أخيراً تطبيق عربي لمتابعة الدراما الكورية! التصميم جميل والمحتوى متجدد دائماً."</p><div class="rv-author"><div class="rv-av">ن</div><div><div class="rv-name">نور ع.</div><div class="rv-role">عضوة جديدة</div></div></div></div>
+  <div class="reviews-grid">
+    <div class="rv" data-rv><div class="rv-stars">★★★★★</div><p class="rv-txt">"أفضل تطبيق دراما جربته! نظام العملات رائع، كل يوم أدخل التطبيق لأجمع مكافأتي."</p><div class="rv-auth"><div class="rv-av">س</div><div><div class="rv-name">سارة م.</div><div class="rv-role">عضو ذهبي · 6 أشهر</div></div></div></div>
+    <div class="rv" data-rv><div class="rv-stars">★★★★★</div><p class="rv-txt">"الترجمة ممتازة بـ 4 لغات والجودة عالية. اشتركت بالعضوية الذهبية وما ندمت!"</p><div class="rv-auth"><div class="rv-av">أ</div><div><div class="rv-name">أحمد ك.</div><div class="rv-role">عضو ذهبي سنوي</div></div></div></div>
+    <div class="rv" data-rv><div class="rv-stars">★★★★☆</div><p class="rv-txt">"مسلسل قلب من حجر والمسلسلات الكورية ترجمتها دقيقة جداً. تطبيق ممتاز!"</p><div class="rv-auth"><div class="rv-av">ن</div><div><div class="rv-name">نور ع.</div><div class="rv-role">مستخدمة جديدة</div></div></div></div>
   </div>
 </div></section>
-<section class="final" id="final">
+
+<!-- FINAL CTA -->
+<section class="final-sec" id="final">
   <div class="final-orb"></div>
-  <h2 data-reveal>ابدأ رحلتك مع<br/><span class="grad-text">Iska Drama</span> اليوم</h2>
-  <p data-reveal>حمّل التطبيق مجاناً واحصل على 13,200 عملة هدية ترحيبية</p>
-  <div class="final-btns" data-reveal>
-    <a href="#" class="btn-hero-primary" style="font-size:1.05rem;padding:16px 40px;">⬇ حمّل مجاناً الآن</a>
-    <a href="#membership" class="btn-hero-ghost" style="font-size:1.05rem;padding:16px 40px;">👑 العضوية الذهبية</a>
+  <h2 data-rv>ابدأ مشاهدتك مع<br/><span class="grad">ISKA DRAMA</span> اليوم</h2>
+  <p data-rv>حمّل مجاناً واحصل على 50 عملة هدية ترحيبية فور التسجيل</p>
+  <div class="final-btns" data-rv>
+    <a href="#" class="btn-primary" style="font-size:1rem;padding:15px 38px;">⬇ حمّل مجاناً الآن</a>
+    <a href="#membership" class="btn-ghost" style="font-size:1rem;padding:15px 38px;">👑 العضوية الذهبية</a>
   </div>
 </section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">🎬 <span style="background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Iska Drama</span></div>
-  <div class="footer-center"><a href="privacy.html">الخصوصية</a><a href="terms.html">الشروط</a><a href="mailto:support@iskadrama.com">تواصل معنا</a></div>
-  <div class="footer-right">© 2026 Iska Drama. جميع الحقوق محفوظة.</div>
+  <div class="fl">🎬 <span style="background:linear-gradient(135deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">ISKA DRAMA</span></div>
+  <div class="fc">
+    <a href="#">الخصوصية</a>
+    <a href="#">الشروط</a>
+    <a href="#">تواصل معنا</a>
+  </div>
+  <div class="fr">© 2026 Iska Drama. جميع الحقوق محفوظة.</div>
 </footer>
+
 <script>
-const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);}});},{threshold:.12});
-document.querySelectorAll('[data-reveal]').forEach(el=>ro.observe(el));
-const co=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const el=x.target,t=parseFloat(el.dataset.count),d=parseInt(el.dataset.dec||0),s=el.dataset.suffix||'';let v=0,st=t/80;const ti=setInterval(()=>{v=Math.min(v+st,t);el.textContent=(d?v.toFixed(d):Math.floor(v).toLocaleString('ar'))+s;if(v>=t)clearInterval(ti);},16);co.unobserve(el);});},{threshold:.5});
+// Scroll reveal
+const ro = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');ro.unobserve(x.target);}});},{threshold:.1});
+document.querySelectorAll('[data-rv]').forEach(el=>ro.observe(el));
+
+// Counters
+const co = new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const el=x.target,t=parseFloat(el.dataset.count),d=parseInt(el.dataset.dec||0),s=el.dataset.suffix||'';let v=0,st=t/80;const ti=setInterval(()=>{v=Math.min(v+st,t);el.textContent=(d?v.toFixed(d):Math.floor(v).toLocaleString('ar'))+s;if(v>=t)clearInterval(ti);},16);co.unobserve(el);});},{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
-const tr=document.querySelector('.shots-scroll');
-if(tr){let dn=false,sx,sl;tr.addEventListener('mousedown',e=>{dn=true;sx=e.pageX-tr.offsetLeft;sl=tr.scrollLeft;});document.addEventListener('mouseup',()=>dn=false);document.addEventListener('mousemove',e=>{if(!dn)return;e.preventDefault();tr.scrollLeft=sl-(e.pageX-tr.offsetLeft-sx);});}
-window.addEventListener('scroll',()=>{document.querySelector('nav').style.background=window.scrollY>60?'rgba(5,4,8,0.92)':'rgba(5,4,8,0.6)';});
+
+// Coin bar
+const coinBarObs = new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.getElementById('coinFill').style.width='100%';coinBarObs.unobserve(x.target);}});},{threshold:.5});
+const cf=document.getElementById('coinFill');
+if(cf)coinBarObs.observe(cf.closest('.coin-card'));
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);});
 </script>
 </body>
-</html>
+</html>'''
+
+import os
+os.makedirs('/root/output', exist_ok=True)
+with open('/root/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+print("Done:", len(html), "chars")
