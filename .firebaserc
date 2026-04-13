@@ -554,8 +554,4 @@ document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>60));
 </script>
 </body>
-<<<<<<< Updated upstream
 </html>
-=======
-</html>
->>>>>>> Stashed changes
