@@ -50,11 +50,12 @@ nav{
 }
 nav.sc{background:rgba(5,5,16,.97);}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo-icon{
-  width:38px;height:38px;border-radius:50%;
-  background:linear-gradient(135deg,#281BFF,#FF3E8A);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;font-weight:900;color:#fff;
+.logo-img{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  object-fit:contain;
+  display:block;
   filter:drop-shadow(0 0 8px rgba(233,30,140,.5));
 }
 .logo-txt{
@@ -286,7 +287,10 @@ footer{
 .footer-brand{
   display:flex;align-items:center;gap:10px;
 }
-.footer-brand .logo-icon{width:34px;height:34px;font-size:1rem;}
+.footer-brand .logo-img{
+  width:34px;
+  height:34px;
+}
 .footer-links{
   display:flex;gap:16px;flex-wrap:wrap;
 }
@@ -404,7 +408,7 @@ footer{
 
 <nav id="nav">
   <a href="index.html" class="logo">
-    <div class="logo-icon">I</div>
+    <img src="app_icon.jpg" alt="ISKA DRAMA" class="logo-img" width="38" height="38">
     <span class="logo-txt">ISKA DRAMA</span>
   </a>
 
@@ -663,7 +667,7 @@ footer{
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="logo-icon">I</div>
+      <img src="app_icon.jpg" alt="ISKA DRAMA" class="logo-img" width="34" height="34">
       <div>
         <div class="logo-txt">ISKA DRAMA</div>
         <div style="font-size:.76rem;color:rgba(255,255,255,.34);margin-top:2px;">عالم الدراما لا ينتهي</div>
