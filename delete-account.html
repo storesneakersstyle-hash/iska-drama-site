@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>حذف الحساب — ISKA DRAMA</title>
-<meta name="description" content="صفحة حذف الحساب لتطبيق ISKA DRAMA — توضح كيفية طلب حذف الحساب والبيانات المرتبطة به."/>
+<meta name="description" content="صفحة حذف الحساب لتطبيق ISKA DRAMA — توضح كيفية طلب حذف الحساب والبيانات المرتبطة به من الويب أو من داخل التطبيق."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
 <style>
@@ -53,6 +53,7 @@ nav{
   height:38px;
   border-radius:50%;
   object-fit:contain;
+  display:block;
 }
 .logo-txt{
   font-size:1.15rem;
@@ -242,7 +243,7 @@ nav{
 .contact-card p{
   color:var(--grey);
   font-size:.9rem;
-  margin-bottom:20px;
+  margin-bottom:16px;
 }
 .contact-email{
   display:inline-flex;
@@ -256,6 +257,36 @@ nav{
   font-weight:700;
   font-size:.92rem;
   text-decoration:none;
+}
+.req-box{
+  margin-top:16px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--div);
+  border-radius:16px;
+  padding:18px;
+  text-align:right;
+}
+.req-box h3{
+  font-size:.95rem;
+  margin-bottom:10px;
+}
+.req-box p{
+  margin:0 0 8px;
+  color:var(--grey);
+  font-size:.88rem;
+}
+.req-box code{
+  display:block;
+  margin-top:8px;
+  padding:10px 12px;
+  border-radius:12px;
+  background:rgba(0,0,0,.22);
+  color:#fff;
+  direction:ltr;
+  text-align:left;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.84rem;
+  overflow:auto;
 }
 footer{
   border-top:1px solid var(--div);
@@ -291,6 +322,7 @@ footer{
   text-decoration:none;
   font-size:.8rem;
 }
+.fc a:hover{color:#fff;}
 .fr-txt{
   color:var(--muted);
   font-size:.75rem;
@@ -319,7 +351,7 @@ footer{
 <div class="hero-pp">
   <div class="pp-badge"><span>🗑️ حذف الحساب</span></div>
   <h1>طلب <span class="grad">حذف الحساب</span></h1>
-  <p>توضح هذه الصفحة كيفية حذف حسابك وبياناتك المرتبطة بتطبيق ISKA DRAMA، سواء من داخل التطبيق أو عبر التواصل معنا.</p>
+  <p>توضح هذه الصفحة كيفية طلب حذف حسابك وبياناتك المرتبطة بتطبيق ISKA DRAMA من الويب أو من داخل التطبيق.</p>
   <span class="updated">📅 آخر تحديث: مايو 2026</span>
 </div>
 
@@ -330,7 +362,27 @@ footer{
       <div class="pp-icon">ℹ️</div>
       <div><h2>معلومات عامة</h2><span>OVERVIEW</span></div>
     </div>
-    <p>إذا كنت قد أنشأت حسابًا في تطبيق ISKA DRAMA، فيمكنك طلب حذف الحساب والبيانات المرتبطة به. نوفر وسيلة حذف من داخل التطبيق، كما يمكنك استخدام هذه الصفحة لمعرفة الطريقة أو للتواصل معنا إذا كنت غير قادر على الوصول إلى حسابك. [web:210][web:211][web:215]</p>
+    <p>إذا كنت قد أنشأت حسابًا في تطبيق ISKA DRAMA، فيمكنك طلب حذف الحساب والبيانات المرتبطة به عبر التطبيق أو عبر هذه الصفحة دون الحاجة إلى إعادة تثبيت التطبيق أو تسجيل الدخول من جديد.</p>
+    <div class="pp-highlight">
+      <span class="pp-highlight-icon">✅</span>
+      <p>هذه الصفحة مخصصة لتكون رابط حذف الحساب الخارجي الذي يمكن الوصول إليه من الويب.</p>
+    </div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">🌐</div>
+      <div><h2>طلب الحذف من الويب</h2><span>WEB REQUEST</span></div>
+    </div>
+    <p>إذا لم تتمكن من الدخول إلى التطبيق، يمكنك طلب حذف الحساب والبيانات المرتبطة به عبر البريد الإلكتروني التالي:</p>
+    <p><strong>iskadrama.app@gmail.com</strong></p>
+    <div class="req-box">
+      <h3>يرجى تضمين المعلومات التالية في الطلب:</h3>
+      <p>- البريد الإلكتروني المرتبط بالحساب.</p>
+      <p>- اسم المستخدم أو أي معلومات تساعد على تحديد الحساب.</p>
+      <p>- توضيح أنك تطلب حذف الحساب والبيانات المرتبطة به.</p>
+      <code>Subject: Account Deletion Request - ISKA DRAMA</code>
+    </div>
   </div>
 
   <div class="pp-card">
@@ -338,7 +390,7 @@ footer{
       <div class="pp-icon">📱</div>
       <div><h2>الحذف من داخل التطبيق</h2><span>IN-APP DELETION</span></div>
     </div>
-    <p>إذا كان بإمكانك تسجيل الدخول إلى حسابك، فاتبع الخطوات التالية لحذف الحساب من داخل التطبيق: [web:210][web:213]</p>
+    <p>إذا كان بإمكانك الوصول إلى حسابك داخل التطبيق، يمكنك بدء حذف الحساب من داخل التطبيق عبر الخطوات التالية:</p>
     <ul class="pp-list">
       <li>افتح تطبيق <strong>ISKA DRAMA</strong>.</li>
       <li>انتقل إلى صفحة <strong>الإعدادات</strong>.</li>
@@ -346,19 +398,9 @@ footer{
       <li>أكّد الطلب عند ظهور رسالة التأكيد.</li>
     </ul>
     <div class="pp-highlight">
-      <span class="pp-highlight-icon">⚠️</span>
-      <p>قد يُطلب منك أحيانًا إعادة تسجيل الدخول قبل تنفيذ الحذف، وذلك لأغراض التحقق الأمني ومنع حذف الحساب من طرف غير مصرح له. [web:213]</p>
+      <span class="pp-highlight-icon">🔐</span>
+      <p>قد نطلب منك إعادة تسجيل الدخول قبل تنفيذ الحذف لأغراض التحقق الأمني وحماية الحساب من الحذف غير المصرح به.</p>
     </div>
-  </div>
-
-  <div class="pp-card">
-    <div class="pp-card-head">
-      <div class="pp-icon">✉️</div>
-      <div><h2>إذا لم تتمكن من الدخول</h2><span>WEB REQUEST</span></div>
-    </div>
-    <p>إذا لم تتمكن من الوصول إلى حسابك من داخل التطبيق، يمكنك إرسال طلب حذف الحساب عبر البريد الإلكتروني التالي: [web:211][web:215]</p>
-    <p><strong>iskadrama.app@gmail.com</strong></p>
-    <p>يرجى أن يتضمن الطلب قدر الإمكان المعلومات التي تساعدنا على تحديد الحساب، مثل البريد الإلكتروني المرتبط بالحساب أو اسم المستخدم أو أي معلومات تعريفية متاحة، حتى نتمكن من التحقق من الطلب وتنفيذه بصورة صحيحة. [web:215]</p>
   </div>
 
   <div class="pp-card">
@@ -368,18 +410,18 @@ footer{
     </div>
     <ul class="pp-list">
       <li>بيانات الحساب الأساسية المرتبطة بالمستخدم.</li>
-      <li>بيانات التقدم داخل التطبيق مثل السجل، الإعجابات، قائمتي، وبعض التفضيلات والمكافآت المرتبطة بالحساب.</li>
-      <li>البيانات المرتبطة بالحساب داخل خدمات المصادقة أو قاعدة البيانات، بحسب بنية التطبيق الحالية.</li>
+      <li>البيانات المرتبطة بالتقدم داخل التطبيق مثل السجل، الإعجابات، قائمتي، وبعض التفضيلات والمكافآت المرتبطة بالحساب.</li>
+      <li>البيانات المرتبطة بالحساب داخل خدمات المصادقة أو قاعدة البيانات، وفق بنية التطبيق الحالية.</li>
     </ul>
-    <p>عند تنفيذ حذف الحساب، نعمل على حذف الحساب والبيانات المرتبطة به أو تعطيلها وفقًا لطبيعة النظام والخدمات المستخدمة. [web:210][web:207]</p>
+    <p>عند قبول طلب الحذف، نعمل على حذف الحساب والبيانات المرتبطة به أو تعطيلها بشكل دائم وفقًا لطبيعة النظام والخدمات المستخدمة.</p>
   </div>
 
   <div class="pp-card">
     <div class="pp-card-head">
       <div class="pp-icon">⏳</div>
-      <div><h2>ما الذي قد نحتفظ به مؤقتًا</h2><span>RETENTION</span></div>
+      <div><h2>ما الذي قد نحتفظ به</h2><span>RETENTION</span></div>
     </div>
-    <p>قد نحتفظ ببعض السجلات المحدودة لفترة مؤقتة إذا كان ذلك ضروريًا لأسباب قانونية أو أمنية أو تقنية أو لمنع الاحتيال وإساءة الاستخدام، وذلك بالقدر اللازم فقط. [web:207][web:213]</p>
+    <p>قد نحتفظ ببعض السجلات المحدودة لفترة مؤقتة إذا كان ذلك ضروريًا لأسباب قانونية أو أمنية أو تقنية أو لمنع الاحتيال وإساءة الاستخدام، وذلك بالقدر اللازم فقط.</p>
   </div>
 
   <div class="pp-card">
@@ -387,7 +429,7 @@ footer{
       <div class="pp-icon">🕒</div>
       <div><h2>مدة المعالجة</h2><span>PROCESSING TIME</span></div>
     </div>
-    <p>نحاول معالجة طلبات حذف الحساب خلال مدة معقولة بعد التحقق من هوية مقدم الطلب وصحة الحساب المقصود. قد تختلف المدة بحسب حالة الحساب وطبيعة البيانات المرتبطة به. [web:213][web:215]</p>
+    <p>نحاول معالجة طلبات حذف الحساب خلال فترة معقولة بعد التحقق من هوية مقدم الطلب وصحة الحساب المقصود. قد تختلف المدة بحسب حالة الحساب وطبيعة البيانات المرتبطة به.</p>
   </div>
 
   <div class="pp-card">
@@ -405,15 +447,15 @@ footer{
   <div class="contact-card">
     <div style="font-size:2rem;margin-bottom:12px;">📬</div>
     <h2>التواصل بخصوص حذف الحساب</h2>
-    <p>لأي طلب متعلق بحذف الحساب أو البيانات، تواصل معنا عبر البريد الإلكتروني التالي:</p>
-    <a href="mailto:iskadrama.app@gmail.com" class="contact-email">✉️ iskadrama.app@gmail.com</a>
+    <p>لأي طلب متعلق بحذف الحساب أو البيانات، يمكنك التواصل معنا عبر البريد الإلكتروني التالي:</p>
+    <a href="mailto:iskadrama.app@gmail.com?subject=Account%20Deletion%20Request%20-%20ISKA%20DRAMA" class="contact-email">✉️ iskadrama.app@gmail.com</a>
   </div>
 
 </div>
 
 <footer>
   <div class="fl">
-    <img src="app_icon.jpg" alt="ISKA DRAMA" width="28" height="28" style="border-radius:50%;object-fit:contain;"/>
+    <img src="app_icon.jpg" alt="ISKA DRAMA" width="28" height="28" style="border-radius:50%;object-fit:contain;display:block;"/>
     <span class="footer-brand">ISKA DRAMA</span>
   </div>
   <div class="fc">
