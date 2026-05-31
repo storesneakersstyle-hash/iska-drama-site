@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>سياسة الخصوصية — ISKA DRAMA</title>
+<meta name="description" content="سياسة الخصوصية لتطبيق ISKA DRAMA — توضيح البيانات المستخدمة داخل التطبيق وكيفية التعامل معها."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#13112A;
+  --surf:#1C1835;
+  --card:#1A1A2E;
+  --pink:#E91E8C;
+  --purple:#7B2FBE;
+  --gold:#FFD740;
+  --grey:#B8B8C7;
+  --muted:#8C8CA1;
+  --div:rgba(255,255,255,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:70px;}
+body{
+  background:var(--bg);
+  color:#fff;
+  font-family:'Cairo',sans-serif;
+  overflow-x:hidden;
+  line-height:1.8;
+}
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  background:rgba(19,17,42,.9);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--div);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+}
+.logo-img{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  object-fit:contain;
+}
+.logo-txt{
+  font-size:1.15rem;
+  font-weight:900;
+  background:linear-gradient(135deg,#ffffff,#f3d1eb);
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+.nav-back{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 18px;
+  border-radius:50px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--div);
+  color:#fff;
+  font-weight:700;
+  font-size:.82rem;
+  text-decoration:none;
+  transition:.3s;
+}
+.nav-back:hover{background:rgba(255,255,255,.1);}
+.hero-pp{
+  padding:110px 6% 56px;
+  text-align:center;
+}
+.pp-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(233,30,140,.08);
+  border:1px solid rgba(233,30,140,.22);
+  padding:6px 18px;
+  border-radius:50px;
+  margin-bottom:20px;
+}
+.pp-badge span{
+  font-size:.74rem;
+  color:var(--pink);
+  font-weight:800;
+  letter-spacing:1px;
+}
+.hero-pp h1{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:900;
+  margin-bottom:14px;
+  line-height:1.15;
+}
+.grad{
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+.hero-pp p{
+  color:var(--grey);
+  font-size:.96rem;
+  max-width:700px;
+  margin:0 auto;
+}
+.updated{
+  display:inline-block;
+  margin-top:14px;
+  background:rgba(255,215,64,.08);
+  border:1px solid rgba(255,215,64,.2);
+  padding:4px 14px;
+  border-radius:50px;
+  font-size:.78rem;
+  color:var(--gold);
+}
+.pp-wrap{
+  max-width:860px;
+  margin:0 auto;
+  padding:0 5% 80px;
+}
+.pp-card{
+  background:rgba(28,24,53,.82);
+  border:1px solid var(--div);
+  border-radius:22px;
+  padding:30px 32px;
+  margin-bottom:18px;
+}
+.pp-card-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:16px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--div);
+}
+.pp-icon{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(233,30,140,.15),rgba(123,47,190,.15));
+  border:1px solid rgba(233,30,140,.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.35rem;
+  flex-shrink:0;
+}
+.pp-card-head h2{
+  font-size:1.05rem;
+  font-weight:800;
+  color:#fff;
+}
+.pp-card-head span{
+  font-size:.72rem;
+  color:var(--pink);
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  display:block;
+  margin-top:2px;
+}
+.pp-card p{
+  color:var(--grey);
+  font-size:.92rem;
+  line-height:1.9;
+  margin-bottom:10px;
+}
+.pp-card p:last-child{margin-bottom:0;}
+.pp-list{
+  list-style:none;
+  margin:10px 0;
+}
+.pp-list li{
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  font-size:.9rem;
+  color:var(--grey);
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  line-height:1.8;
+}
+.pp-list li:last-child{border-bottom:none;}
+.pp-list li::before{
+  content:'';
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  flex-shrink:0;
+  margin-top:10px;
+}
+.pp-list li strong{color:#fff;}
+.pp-highlight{
+  background:rgba(233,30,140,.05);
+  border:1px solid rgba(233,30,140,.15);
+  border-radius:14px;
+  padding:16px 18px;
+  margin:14px 0;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+.pp-highlight-icon{
+  font-size:1.3rem;
+  flex-shrink:0;
+  margin-top:2px;
+}
+.pp-highlight p{
+  color:var(--grey);
+  font-size:.9rem;
+  line-height:1.8;
+  margin:0;
+}
+.contact-card{
+  background:linear-gradient(135deg,rgba(233,30,140,.08),rgba(123,47,190,.08));
+  border:1px solid rgba(233,30,140,.2);
+  border-radius:22px;
+  padding:32px;
+  text-align:center;
+  margin-bottom:18px;
+}
+.contact-card h2{
+  font-size:1.2rem;
+  font-weight:900;
+  margin-bottom:8px;
+}
+.contact-card p{
+  color:var(--grey);
+  font-size:.9rem;
+  margin-bottom:20px;
+}
+.contact-email{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(233,30,140,.1);
+  border:1px solid rgba(233,30,140,.25);
+  padding:10px 22px;
+  border-radius:50px;
+  color:var(--pink);
+  font-weight:700;
+  font-size:.92rem;
+  text-decoration:none;
+}
+footer{
+  border-top:1px solid var(--div);
+  background:rgba(28,24,53,.6);
+  padding:28px 8%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.fl{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:1rem;
+  font-weight:900;
+}
+.footer-brand{
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+.fc{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.fc a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.8rem;
+}
+.fr-txt{
+  color:var(--muted);
+  font-size:.75rem;
+}
+@media(max-width:600px){
+  nav{padding:0 4%;}
+  .hero-pp{padding:92px 4% 40px;}
+  .pp-wrap{padding:0 4% 60px;}
+  .pp-card{padding:22px 18px;}
+  .pp-card-head{flex-direction:column;align-items:flex-start;}
+  footer{flex-direction:column;text-align:center;padding:24px 4%;}
+  .fc{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="app_icon.jpg" class="logo-img" alt="ISKA DRAMA"/>
+    <span class="logo-txt">ISKA DRAMA</span>
+  </a>
+  <a href="index.html" class="nav-back">← العودة للرئيسية</a>
+</nav>
+
+<div class="hero-pp">
+  <div class="pp-badge"><span>🔒 سياسة الخصوصية</span></div>
+  <h1>نحن نحترم <span class="grad">خصوصيتك</span></h1>
+  <p>توضح هذه الصفحة كيف يتعامل تطبيق ISKA DRAMA مع بيانات المستخدمين استنادًا إلى الوظائف الظاهرة داخل التطبيق والخدمات المرتبطة به.</p>
+  <span class="updated">📅 آخر تحديث: مايو 2026</span>
+</div>
+
+<div class="pp-wrap">
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">📋</div>
+      <div><h2>مقدمة</h2><span>INTRODUCTION</span></div>
+    </div>
+    <p>تنطبق سياسة الخصوصية هذه على استخدام تطبيق ISKA DRAMA والخدمات المرتبطة به. باستخدامك للتطبيق، فإنك توافق على هذه السياسة بالصيغة المنشورة هنا.</p>
+    <div class="pp-highlight">
+      <span class="pp-highlight-icon">💡</span>
+      <p>نحن لا نذكر في هذه الصفحة أي نوع بيانات لا يمكن تأكيده من الوظائف الفعلية الظاهرة داخل التطبيق.</p>
+    </div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">📦</div>
+      <div><h2>البيانات التي قد تُستخدم داخل التطبيق</h2><span>DATA USED IN APP</span></div>
+    </div>
+    <ul class="pp-list">
+      <li><strong>بيانات الحساب:</strong> الاسم والبريد الإلكتروني المرتبطان بالحساب.</li>
+      <li><strong>بيانات التفضيلات:</strong> اللغة، حالة تفعيل الإشعارات، والوضع الداكن.</li>
+      <li><strong>بيانات الاستخدام داخل التطبيق:</strong> السجل، الإعجابات، قائمتي، والحلقات التي تم فتحها.</li>
+      <li><strong>بيانات التقدم والمكافآت:</strong> العملات، تسجيل الحضور اليومي، المهام اليومية، والجوائز المرتبطة باستخدام التطبيق.</li>
+      <li><strong>بيانات العضوية:</strong> حالة العضوية ونوع الخطة داخل التطبيق عند توفرها للحساب.</li>
+    </ul>
+    <p>لا تتضمن هذه الصفحة ادعاءً بجمع عنوان IP أو معرف الجهاز أو تخزين كلمة المرور داخل قاعدة بيانات التطبيق، لأن ذلك غير مؤكد من الملفات البرمجية المقروءة.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">⚙️</div>
+      <div><h2>كيف نستخدم هذه البيانات</h2><span>HOW DATA IS USED</span></div>
+    </div>
+    <ul class="pp-list">
+      <li>تشغيل الحساب وربط المستخدم ببياناته داخل التطبيق.</li>
+      <li>حفظ التقدم مثل العملات، الحلقات المفتوحة، الإعجابات، والسجل.</li>
+      <li>إدارة المكافآت والمهام اليومية والعضوية داخل التطبيق.</li>
+      <li>حفظ تفضيلات المستخدم مثل اللغة والإشعارات والوضع الداكن.</li>
+      <li>تحسين استقرار التطبيق وتشغيل وظائفه الأساسية.</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">🔗</div>
+      <div><h2>الخدمات المرتبطة</h2><span>SERVICES</span></div>
+    </div>
+    <p>يستخدم التطبيق خدمات Firebase من Google لتشغيل المصادقة وقاعدة البيانات المرتبطة بالحساب وبيانات الاستخدام داخل التطبيق.</p>
+    <p>كما تُستخدم صفحات ويب خارجية لعرض سياسة الخصوصية وشروط الاستخدام من خلال الرابط الذي يفتحه التطبيق.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">🛡️</div>
+      <div><h2>حماية البيانات</h2><span>DATA SECURITY</span></div>
+    </div>
+    <p>نعمل على حماية بيانات التطبيق عبر البنية المستخدمة لتشغيل الحسابات وقاعدة البيانات والاتصال بالخدمة.</p>
+    <p>ومع ذلك، لا يمكن ضمان الأمان المطلق بنسبة 100% في أي خدمة متصلة بالإنترنت.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">🗑️</div>
+      <div><h2>حذف الحساب والبيانات</h2><span>ACCOUNT DELETION</span></div>
+    </div>
+    <p>يمكن للمستخدم حذف حسابه من داخل التطبيق مباشرة.</p>
+    <ul class="pp-list">
+      <li>افتح صفحة <strong>الإعدادات</strong>.</li>
+      <li>اختر <strong>حذف الحساب</strong>.</li>
+      <li>أكد عملية الحذف عند ظهور رسالة التأكيد.</li>
+    </ul>
+    <p>عند تنفيذ الحذف من داخل التطبيق، تتم إزالة بيانات الحساب المرتبطة بالمستخدم من قاعدة البيانات المستخدمة للتطبيق، ثم تُزال بيانات الجلسة المحلية من الجهاز.</p>
+    <div class="pp-highlight">
+      <span class="pp-highlight-icon">⚠️</span>
+      <p>قد تتطلب عملية الحذف إعادة تسجيل الدخول قبل إتمامها في بعض الحالات وفق متطلبات خدمة المصادقة.</p>
+    </div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">⚖️</div>
+      <div><h2>حقوق المستخدم</h2><span>YOUR RIGHTS</span></div>
+    </div>
+    <ul class="pp-list">
+      <li>مراجعة بعض بياناتك من خلال الحساب داخل التطبيق.</li>
+      <li>تعديل بعض التفضيلات مثل اللغة والإشعارات.</li>
+      <li>حذف الحساب من داخل التطبيق.</li>
+      <li>التواصل معنا بخصوص الاستفسارات المتعلقة بالخصوصية.</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-head">
+      <div class="pp-icon">🔄</div>
+      <div><h2>التحديثات</h2><span>UPDATES</span></div>
+    </div>
+    <p>قد نقوم بتحديث هذه السياسة عند تغير وظائف التطبيق أو طريقة تشغيله، وسيتم تعديل تاريخ آخر تحديث في أعلى الصفحة عند نشر أي نسخة جديدة.</p>
+  </div>
+
+  <div class="contact-card">
+    <div style="font-size:2rem;margin-bottom:12px;">📬</div>
+    <h2>للاستفسار حول الخصوصية</h2>
+    <p>يمكنك التواصل معنا عبر البريد الإلكتروني التالي:</p>
+    <a href="mailto:iskadrama.app@gmail.com" class="contact-email">✉️ iskadrama.app@gmail.com</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="fl">
+    <img src="app_icon.jpg" alt="ISKA DRAMA" width="28" height="28" style="border-radius:50%;object-fit:contain;"/>
+    <span class="footer-brand">ISKA DRAMA</span>
+  </div>
+  <div class="fc">
+    <a href="index.html">الرئيسية</a>
+    <a href="privacy.html">سياسة الخصوصية</a>
+    <a href="terms.html">شروط الاستخدام</a>
+  </div>
+  <div class="fr-txt">© 2026 ISKA DRAMA</div>
+</footer>
+
+</body>
+</html>
